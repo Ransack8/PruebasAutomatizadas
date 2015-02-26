@@ -67,7 +67,7 @@ import org.apache.log4j.SimpleLayout;
 
 
 
-public class Flowbanc {
+public class Flowbanc{
     //para las capturas, maximizar y minimizar el navegador
 	
 	
@@ -79,7 +79,7 @@ public class Flowbanc {
       private StringBuffer verificationErrors = new StringBuffer();
       static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       static Random rnd = new Random();
-      MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla\\","Flowbanc");
+      MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\","Flowbanc");
     
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
@@ -134,7 +134,7 @@ public String randomString( int len )
       public static void main(String[] args){ 
           
           JUnitCore junit = new JUnitCore();          
-          junit.run(WebdriverTest.class);
+          junit.run(Flowbanc.class);
       }
 
       @Test      
