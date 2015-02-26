@@ -1,15 +1,15 @@
 package selenium_maven_eclipse;
 
-//import de seleniums
+
 import static org.junit.Assert.*;
 
 import org.junit.*;
-//import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.JUnitCore;
 //import org.junit.runner.Runner;
 
 
-
+import org.junit.runners.MethodSorters;
+//import de seleniums
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -24,34 +24,13 @@ import org.openqa.selenium.Keys;
 
 
 
-
-
-
-
-
-
-
-
-
 import java.io.File;
 import java.util.Random;
 //permite definir una espera o delay mientras carga un elemento
 import java.util.concurrent.TimeUnit;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import org.apache.commons.io.FileUtils;
+
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -66,11 +45,10 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 
 
-
+//correr los casos en orden alfabetico
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Flowbanc{
-    //para las capturas, maximizar y minimizar el navegador
-	
-	
+ 	
     //declaracion del webdriver y la direccion de la pagina
       public static WebDriver driver;
       public static String baseUrl;
@@ -79,6 +57,7 @@ public class Flowbanc{
       private StringBuffer verificationErrors = new StringBuffer();
       static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       static Random rnd = new Random();
+      //para las capturas, maximizar y minimizar el navegador
       MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\","Flowbanc");
     
       // declaracion de los loggers  
@@ -128,8 +107,7 @@ public String randomString( int len )
    return sb.toString();
 }
 
-      
-      
+  
       //este es el main
       public static void main(String[] args){ 
           
@@ -138,7 +116,7 @@ public String randomString( int len )
       }
 
       @Test      
-      public void main() throws Exception {   
+      public void A1logingincorrecto() throws Exception {   
         
            logger.info("Inicio de los casos de prueba"); 
             

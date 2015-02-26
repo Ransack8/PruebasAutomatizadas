@@ -1,6 +1,0 @@
-INFO - fin del setup de los logs
-INFO - Inicio de los casos de prueba
-ERROR - ERROR: org.junit.ComparisonFailure: expected:<×[Close ]Invalid username or ...> but was:<×[
-Close
-]Invalid username or ...>
-INFO - log correcto
