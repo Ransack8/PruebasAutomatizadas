@@ -20,10 +20,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Keys;
 
-
-
-
-
 import java.io.File;
 import java.util.Random;
 //permite definir una espera o delay mientras carga un elemento
@@ -64,7 +60,6 @@ public class Flowbanc{
       public static final Logger logger = Logger.getLogger("WebdriverTest");
       
       //la anotación BeforeClass son las cosas que se ejecutan antes de la prueba
-     
       @BeforeClass
       public static void setUp() throws Exception {          
           //<<<<<LOGS>>>>>
@@ -95,7 +90,16 @@ public class Flowbanc{
          * baseUrl = "https://login.live.com/";
          * driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);*/
        
-          logger.info("fin del setup de los logs");
+          
+          
+          //<<<<<WebDriver>>>>>
+          //default para FIREFOX  
+          driver = new FirefoxDriver();
+          baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
+          driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    	  driver.get(baseUrl);
+    	  
+    	  logger.info("fin del setup");
       }//cierre del setup
       
 //metodo de random
@@ -106,7 +110,6 @@ public String randomString( int len )
       sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
    return sb.toString();
 }
-
   
       //este es el main
       public static void main(String[] args){ 
@@ -117,7 +120,13 @@ public String randomString( int len )
 
       @Test      
       public void A1logingincorrecto() throws Exception {   
-        
+    	  
+    	  
+          driver.findElement(By.xpath("//input[@type='username']")).clear();
+          driver.findElement(By.xpath("//input[@type='username']")).sendKeys("emailvalido@noregistrado.com");
+          driver.findElement(By.xpath("//input[@type='password']")).clear();
+          driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+          driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
            logger.info("Inicio de los casos de prueba"); 
             
       }//cierre del main
@@ -125,12 +134,7 @@ public String randomString( int len )
       
       @Test    
       public void EmailInvalido()throws Exception{
-          //<<<<<WebDriver>>>>>
-          //default para FIREFOX  
-          driver = new FirefoxDriver();
-          baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
-          driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    	  driver.get(baseUrl);
+
           
           logger.debug("Inicio del caso EmailInvalido");
           

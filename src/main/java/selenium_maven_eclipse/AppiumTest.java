@@ -252,7 +252,7 @@ public class AppiumTest {
 					  */
 				}//fin de loging correcto
 	
-	//@Test
+	@Test
 	public void A4verificartutorialinterno() throws InterruptedException {
 		alogger.info("A4verificartutorialinterno");		
 		//verificar textos titulo tutorial
@@ -285,7 +285,7 @@ public class AppiumTest {
 		
         }//fin verificartutorial
 	
-	@Test
+	//@Test
 	public void A5verificarmenu() throws InterruptedException {
 		alogger.info("A5verificarmenu");		
 		WebElement menu= driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='android:id/up']"));
@@ -301,7 +301,7 @@ public class AppiumTest {
 		verificatxt("TUTORIAL","//android.widget.ListView/android.widget.LinearLayout[@index='4']/android.widget.LinearLayout/android.widget.TextView");
 		verificatxt(cerrarsesion,"//android.widget.ListView/android.widget.LinearLayout[@index='5']/android.widget.LinearLayout/android.widget.TextView");
 				
-		/*
+		
 		//reviso navegacion toques
 		driver.tap(1,100, 260,100);
 		verificatxt(pagarid,"//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/action_bar_text']");
@@ -317,7 +317,7 @@ public class AppiumTest {
 		Thread.sleep(1500);
 		driver.tap(1,100, 404,100);
 		verificatxt(textoetiquetatutorial,"//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/action_bar_text']");		
-		driver.navigate().back();*/
+		driver.navigate().back();
 		
 		//reviso navegacion con clicks
 		//menu.click();
@@ -342,11 +342,17 @@ public class AppiumTest {
 		
 		}//fin verificarmenu
 	
-	//@Test
+	@Test
 	public void A6verificarresumenflash() throws InterruptedException {
 		alogger.info("A6verificarresumenflash");		
 	    //verifico los textos del menu
-		verificatxt(resumenflash,"//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/action_bar_text']");		
+		verificatxt(resumenflash,"//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/action_bar_text']");	
+		verificatxt("Bienvenido","//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/welcome_label']");
+		verificatxt("ID Flash","//android.widget.TextView[@resource-id='com.synergygb.pagoflash.view:id/id_flash_bar_name']");
+		
+		verificatxt("1","//android.widget.ListView/android.widget.RelativeLayout[@index='1']/android.widget.LinearLayout[@index='0']/android.widget.TextView[@index='0']");
+		verificatxt("12345678","//android.widget.ListView/android.widget.RelativeLayout[@index='1']/android.widget.LinearLayout[@index='0']/android.widget.TextView[@index='1']");
+		
 		
 
         }//fin verificarmenu	
