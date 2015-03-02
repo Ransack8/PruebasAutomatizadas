@@ -1,13 +1,10 @@
 package selenium_maven_eclipse;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.*;
 import org.junit.runner.JUnitCore;
-//import org.junit.runner.Runner;
-
-
+import org.junit.runner.Runner;
 import org.junit.runners.MethodSorters;
 //import de seleniums
 import org.openqa.selenium.By;
@@ -21,12 +18,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Keys;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 //permite definir una espera o delay mientras carga un elemento
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -41,6 +39,13 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 
 
+
+
+
+
+//para los time stamp
+import java.util.Date;
+
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Flowbanc{
@@ -53,11 +58,50 @@ public class Flowbanc{
       private StringBuffer verificationErrors = new StringBuffer();
       static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       static Random rnd = new Random();
-      //para las capturas, maximizar y minimizar el navegador
-      MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\","Flowbanc");
-    
+    //captura de pantalla
+      String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm ").format(new Date());
+      MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\Flowbanc\\",filetimestamp);
+  		public String metodo = null;
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
+      
+  	/**
+  	 * 	verifica texto manda mensajes al log y error al junit
+  	 * @param que texto a verificar
+  	 * @param donde donde se encuentra por xpath
+  	 */
+  	public void verificatxt(String que , String donde ){
+  	
+      try {
+          assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+        } catch (Error e) {
+            //MANDANDO EL ERROR AL LOG y al junit
+          logger.error("ERROR: "+e.toString());
+          assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+        }
+  	}
+  	
+	public void control(String cualmetodo){
+		logger.info("Entro en el metodo "+cualmetodo);
+		metodo = null;
+		metodo = cualmetodo;		
+		}
+	
+	public void captura (String path) throws IOException{
+
+		mShot.elementScreenShot(driver, driver.findElement(By.xpath(path)));
+	
+	}	
+	
+	public void captura () throws IOException{
+		
+	mShot.multiScreenShot(driver);
+	
+	
+	}
+
+
+      
       
       //la anotación BeforeClass son las cosas que se ejecutan antes de la prueba
       @BeforeClass
@@ -97,8 +141,7 @@ public class Flowbanc{
           driver = new FirefoxDriver();
           baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
           driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    	  driver.get(baseUrl);
-    	  
+    	  driver.get(baseUrl);    	  
     	  logger.info("fin del setup");
       }//cierre del setup
       
@@ -120,14 +163,17 @@ public String randomString( int len )
 
       @Test      
       public void A1logingincorrecto() throws Exception {   
-    	  
-    	  
+    	  control("A1logingincorrecto");
+
           driver.findElement(By.xpath("//input[@type='username']")).clear();
           driver.findElement(By.xpath("//input[@type='username']")).sendKeys("emailvalido@noregistrado.com");
           driver.findElement(By.xpath("//input[@type='password']")).clear();
           driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
           driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-           logger.info("Inicio de los casos de prueba"); 
+          logger.info("Inicio de los casos de prueba"); 
+          
+          
+          captura();
             
       }//cierre del main
       
