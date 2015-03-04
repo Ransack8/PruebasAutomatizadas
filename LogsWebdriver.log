@@ -7,3 +7,31 @@ INFO - Inicio de los casos de prueba
 ERROR - ERROR: org.junit.ComparisonFailure: expected:<×[Close ]Invalid username or ...> but was:<×[
 Close
 ]Invalid username or ...>
+INFO - fin del setup
+INFO - Entro en el metodo A1logingincorrecto
+INFO - Inicio de los casos de prueba
+INFO - fin del setup
+INFO - Entro en el metodo A1logingincorrecto
+INFO - Inicio de los casos de prueba
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<×[Close ]Invalid username or ...> but was:<×[
+Close
+]Invalid username or ...>
+INFO - fin del setup
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[×
+Close
+Invalid username or password.]> but was:<[]>
+INFO - fin del setup
+INFO - Entro en el metodo A1datoslogsvacios
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[×
+Close
+Invalid username or password.]> but was:<[]>
+INFO - fin del setup
+INFO - Entro en el metodo A1datoslogsvacios
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[×
+Close
+Invalid username or password.]> but was:<[]>
+INFO - fin del setup
+INFO - Entro en el metodo A1datoslogsvacios
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[×
+Close
+Invalid username or password.]> but was:<[]>

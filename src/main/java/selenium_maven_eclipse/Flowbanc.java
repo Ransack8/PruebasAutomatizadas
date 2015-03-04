@@ -161,40 +161,22 @@ public String randomString( int len )
           junit.run(Flowbanc.class);
       }
 
-      @Test      
-      public void A1logingincorrecto() throws Exception {   
-    	  control("A1logingincorrecto");
-
-          driver.findElement(By.xpath("//input[@type='username']")).clear();
-          driver.findElement(By.xpath("//input[@type='username']")).sendKeys("emailvalido@noregistrado.com");
-          driver.findElement(By.xpath("//input[@type='password']")).clear();
-          driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
-          driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-          logger.info("Inicio de los casos de prueba"); 
-          
-          
-          captura();
-            
-      }//cierre del main
+   
       
-      
-      @Test    
-      public void EmailInvalido()throws Exception{
-
+     @Test    
+      public void A1datoslogsvacios()throws Exception{
+    	 control("A1datoslogsvacios");
           
           logger.debug("Inicio del caso EmailInvalido");
           
           
                    
             driver.findElement(By.xpath("//input[@type='username']")).clear();
-            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("emailvalido@noregistrado.com");
+            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("");
             driver.findElement(By.xpath("//input[@type='password']")).clear();
             driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
             driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
             
-            //esta es la pausa hasta que cargue el elemento
-            wait = new WebDriverWait(driver, 10);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")));
             
             
             
@@ -241,13 +223,9 @@ public String randomString( int len )
       
       
 
-      @Test    
+     // @Test    
       public void logingincorrecto()throws Exception{
-          //<<<<<WebDriver>>>>>
-          //default para FIREFOX  
-          driver = new FirefoxDriver();
-          baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
-          driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
     	  
     	  
           driver.get(baseUrl);
@@ -309,13 +287,9 @@ public String randomString( int len )
             
       }//fin del logingincorrecto
       
-      @Test    
+     // @Test    
       public void logcorrecto()throws Exception{
-          //<<<<<WebDriver>>>>>
-          //default para FIREFOX  
-          driver = new FirefoxDriver();
-          baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
-          driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
     	  
       
           driver.get(baseUrl);
@@ -366,7 +340,7 @@ public String randomString( int len )
       }//fin del logcorrecto
       
       
-     @After
+    //@After
       public void tearDown() throws Exception {
     	    driver.quit();
     	    
@@ -377,6 +351,44 @@ public String randomString( int len )
     	   // }
     	  }
     
+      
+      
+      /*
+       * driver.get(baseUrl + "chrome://web-developer/content/generated/view-color-information.html");
+ 
+assertEquals("#a1513c", driver.findElement(By.xpath("//div[@id='content']/div/div[11]/span")).getText());
+  
+assertTrue(isElementPresent(By.xpath("//input[@type='username']")));
+
+
+assertEquals("", driver.findElement(By.xpath("//input[")).getAttribute("type='password']"));
+  }
+
+  
+                <form class="form-horizontal ng-valid ng-dirty">
+                    <fieldset>
+                        <div class="form-group" data-ng-class="{'has-error':invalidEmail}">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            <input style="" class="form-control input-lg input-round text-center ng-valid ng-dirty" placeholder="Email" data-ng-model="username" data-ng-keyup="$event.keyCode == 13 &amp;&amp; signin(username, password)" type="username">
+                        </div>
+                        <div class="form-group has-error" data-ng-class="{'has-error':invalidPassword}">
+                            <span class="glyphicon glyphicon-lock"></span>
+                            <input class="form-control input-lg input-round text-center ng-pristine ng-valid" placeholder="Password" data-ng-model="password" data-ng-keyup="$event.keyCode == 13 &amp;&amp; signin(username, password)" type="password">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-lg btn-round btn-block text-center" data-ng-click="signin(username, password)">Log in</button>
+                        </div>
+                    </fieldset>
+                </form>
+                
+                
+*/
+      
+      
+      
+      
+      
+      
     
 
 
