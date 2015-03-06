@@ -1,13 +1,15 @@
 package selenium_maven_eclipse;
 
-import static org.junit.Assert.*;
-
+import org.junit.Assert.*;
 import org.junit.*;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Runner;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.Alert;
 //import de seleniums
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -32,19 +34,28 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.SimpleLayout;
+
+
 /**Librería del driver de Internet Explorer,
  * import org.openqa.selenium.ie.InternetExplorerDriver;
  * import org.openqa.selenium.remote.DesiredCapabilities;
  * import org.openqa.selenium.support.ui.ExpectedConditions;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
+//imports para manejo de assert con alertas
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-
-
+import org.openqa.selenium.support.ui.Select;
 
 
 //para los time stamp
 import java.util.Date;
+
+
+
 
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -58,30 +69,70 @@ public class Flowbanc{
       private StringBuffer verificationErrors = new StringBuffer();
       static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       static Random rnd = new Random();
-    //captura de pantalla
+      private boolean acceptNextAlert = true;
+     //captura de pantalla
       String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm ").format(new Date());
       MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\Flowbanc\\",filetimestamp);
   		public String metodo = null;
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
       
+
+      
   	/**
   	 * 	verifica texto manda mensajes al log y error al junit
   	 * @param que texto a verificar
   	 * @param donde donde se encuentra por xpath
   	 */
-  	public void verificatxt(String que , String donde ){
+  	public void verificatxt(String que , By by ){
   	
       try {
-          assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+          assertEquals(que, driver.findElement(by).getText());
         } catch (Error e) {
             //MANDANDO EL ERROR AL LOG y al junit
           logger.error("ERROR: "+e.toString());
-          assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+          assertEquals(que, driver.findElement(by).getText());
         }
   	}
   	
-	public void control(String cualmetodo){
+  	public void verificatxt(String que , String donde){
+  	  	
+        try {
+            assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+          } catch (Error e) {
+              //MANDANDO EL ERROR AL LOG y al junit
+            logger.error("ERROR: "+e.toString());
+            assertEquals(que, driver.findElement(By.xpath(donde)).getText());
+          }
+    	}
+  	public void estapresente (By by){
+  
+        try {
+        	assertTrue(isElementPresent(by));
+          } catch (Error e) {
+            logger.error("ERROR: Elemento no esta presente"+e.toString());
+            assertTrue(isElementPresent(by));
+          }
+  		
+  
+  
+  	}
+  
+  	public void estanopresente(By by){
+  
+   	 try {
+         assertFalse(isElementPresent(by));
+       } catch (Error e) {
+         logger.error("Elemento si esta presente"+e.toString());
+         assertFalse(isElementPresent(by));
+       }
+  	  
+  
+  	}
+  	
+  	
+  
+  	public void control(String cualmetodo){
 		logger.info("Entro en el metodo "+cualmetodo);
 		metodo = null;
 		metodo = cualmetodo;		
@@ -100,6 +151,51 @@ public class Flowbanc{
 	
 	}
 
+	
+	//para saber si esta presente un elemento
+	  private boolean isElementPresent(By by) {
+		    try {
+		      driver.findElement(by);
+		      return true;
+		    } catch (NoSuchElementException e) {
+		      return false;
+		    }
+		  }
+//para saber si esta presente un alerta
+	  private boolean isAlertPresent() {
+		    try {
+		      driver.switchTo().alert();
+		      return true;
+		    } catch (NoAlertPresentException e) {
+		      return false;
+		    }
+		  }
+	//para saber usar los alertas
+		  private String closeAlertAndGetItsText() {
+		    try {
+		      Alert alert = driver.switchTo().alert();
+		      String alertText = alert.getText();
+		      if (acceptNextAlert) {
+		        alert.accept();
+		      } else {
+		        alert.dismiss();
+		      }
+		      return alertText;
+		    } finally {
+		      acceptNextAlert = true;
+		    }
+		  }
+	  
+	  
+	//metodo de random
+	  public String randomString( int len ) 
+	  {
+	     StringBuilder sb = new StringBuilder( len );
+	     for( int i = 0; i < len; i++ ) 
+	        sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+	     return sb.toString();
+	  }
+	    
 
       
       
@@ -140,20 +236,12 @@ public class Flowbanc{
           //default para FIREFOX  
           driver = new FirefoxDriver();
           baseUrl = "https://flowbanc.herokuapp.com/#/pages/signin";
-          driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	  driver.get(baseUrl);    	  
     	  logger.info("fin del setup");
       }//cierre del setup
       
-//metodo de random
-public String randomString( int len ) 
-{
-   StringBuilder sb = new StringBuilder( len );
-   for( int i = 0; i < len; i++ ) 
-      sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-   return sb.toString();
-}
-  
+
       //este es el main
       public static void main(String[] args){ 
           
@@ -163,228 +251,100 @@ public String randomString( int len )
 
    
       
+     //@Test    
+      public void A1verificarloging()throws Exception{
+    	 control("A1verificarloging");
+         //maximze the window
+         driver.manage().window().maximize();
+                 
+        //ambos llenos pero incorrectos
+    	estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+ 	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
+ 	 	verificatxt("×\nClose\nInvalid username or password.", By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+ 	 	//falta el que leer el mensaje
+    	
+ 	 	//usuario vacio
+ 		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+ 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+        driver.findElement(By.xpath("//input[@type='password']")).clear();
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+        estapresente(By.xpath("//div[@class='form-group has-error']"));
+
+ 	 	//pass vacio
+ 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+        driver.findElement(By.xpath("//input[@type='password']")).clear();
+        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+        estapresente(By.xpath("//div[@class='form-group has-error']"));
+
+   	    //ambos vacios
+        driver.findElement(By.xpath("//input[@type='username']")).clear();
+        driver.findElement(By.xpath("//input[@type='password']")).clear();
+        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+        estapresente(By.xpath("//div[@class='form-group has-error']"));
+                    
+      }//fin del A1verificarloging
+      
+         
      @Test    
-      public void A1datoslogsvacios()throws Exception{
-    	 control("A1datoslogsvacios");
+     public void A2recordarcontraseña()throws Exception{
+   	 control("A2recordarcontraseña");     	 
+   	 driver.findElement(By.linkText("Forgot your password?")).click();
+	 Thread.sleep(1000);
+   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.cssSelector("p.text-small"));
+	 verificatxt("Reset",By.linkText("Reset"));
+
+
+           driver.findElement(By.xpath("//input[@type='email']")).clear();
+           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
+           driver.findElement(By.linkText("Reset")).click();
+           captura();
+
+           
+           
+     }//fin del A2recordarcontraseña
+     
+     
+     
+     
+     
+     //@Test    
+      public void A3logcorrecto()throws Exception{
+    	 control("A3logcorrecto");     	 
+    	 driver.get(baseUrl);
+    	 
+    	 verificatxt("Log in","(//button[@type='button'])[2]");
+    	 verificatxt("Don't have an account yet? Sign up","//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
+    	 verificatxt("Forgot your password?",By.linkText("Forgot your password?"));
+
+
           
-          logger.debug("Inicio del caso EmailInvalido");
-          
-          
-                   
-            driver.findElement(By.xpath("//input[@type='username']")).clear();
-            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("");
-            driver.findElement(By.xpath("//input[@type='password']")).clear();
-            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
-            driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-            
-            
-            
-            
-            /**ACA ES COMO LO DEBERIAMOS HACER   TRY Y ASSERT*/
-            try {
-                assertEquals("×\nClose\nInvalid username or password.", driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText());
-              } catch (Error e) {
-                //MANDANDO EL ERROR AL LOG
-                logger.error("ERROR: "+e.toString());
-                //repito la misma asert para interrumpir la prueba y mandar el error al junit
-                assertEquals("×\nClose\nInvalid username or password.", driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText());
-              }
-            
-            
-
-        
-            
-          //por log completamente
-            /*para guardar un texto de la pagina en un string
-            String validar = driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText();
-            para escribir un texto al log de una variable guardada
-            logger.info("EL mensaje de usuario incorrecto que salio es "+validar);
-            comparar una variable string con otro texto
-            if(validar.equals("×Close Invalid username or password.")){logger.info("msg correcto");}else {logger.info("msg incorrecto");}*/
-            
-            
-            /**aca validas si son iguales tipo junit, todo lo demas del assert
-             * cuando no es verdadero no se ejecuta revisar verify*/
-            assertEquals("×\nClose\nInvalid username or password.", driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText());
-            
-            
-            
-            
-            //cuando quieres enviar un error al junit con un mensaje cuando falla un test
-            //fail("ejemplo de fail de prueba");
-            
-             
-            
-      }//fin del logingincorrecto
-      
-      
-      
-      
-      
-      
-
-     // @Test    
-      public void logingincorrecto()throws Exception{
-
-    	  
-    	  
-          driver.get(baseUrl);
-          
-          logger.debug("se cargo la pagina flobanc");
-          
-              driver.findElement(By.xpath("//input[@type='username']")).clear();
-            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("correo.incorrecto@syngergy-gb.com");
-            driver.findElement(By.xpath("//input[@type='password']")).clear();
-            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("prueba");
-            
-           //CAPTURAS
-          //maximze the window
-            driver.manage().window().maximize();
-            //full screenshot
-            mShot.multiScreenShot(driver);
-          //take element screenshot using MultiScreenShot class
-            mShot.elementScreenShot(driver, driver.findElement(By.xpath("//input[@type='username']")));
-            
-            driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-            
-            //esta es la pausa hasta que cargue el elemento
-            wait = new WebDriverWait(driver, 10);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")));
-            
-            /**ACA ES CON VERIFY*/
-            try {
-                assertEquals("×Close Invalid username or password.", driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText());
-              } catch (Error e) {
-                verificationErrors.append(e.toString());
-                //MANDANDO EL ERROR AL LOG
-                logger.error("ERROR: "+e.toString());
-
-
-              }
-            
-            
-   
-        
-            
-          //por log completamente
-            /*
-            String validar = driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText();
-            logger.info("EL mensaje de usuario incorrecto que salio es "+validar);
-            if(validar.equals("×Close Invalid username or password.")){logger.info("msg correcto");}else {logger.info("msg incorrecto");}*/
-            
-            
-            /**aca validas si son iguales tipo junit, todo lo demas del assert
-             * cuando no es verdadero no se ejecuta revisar verify*/
-            assertEquals("×\nClose\nInvalid username or password.", driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section/div")).getText());
-            
-            
-            
-            
-            //cuando quieres enviar un error al junit con un mensaje cuando falla un test
-            //fail("ejemplo de fail de prueba");
-            
-             
-            
-      }//fin del logingincorrecto
-      
-     // @Test    
-      public void logcorrecto()throws Exception{
-
-    	  
-      
-          driver.get(baseUrl);
-            logger.debug("se cargo la pagina segundo caso");
-            
             driver.findElement(By.xpath("//input[@type='username']")).clear();
             driver.findElement(By.xpath("//input[@type='username']")).sendKeys("juan.rodriguez@synergy-gb.com");
             driver.findElement(By.xpath("//input[@type='password']")).clear();
-            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("prueba");
+            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("prueba");            
             driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-            
 
             
-            //estos assert no sirven porque comparamos nada con textos de imagen ojo...
-            assertEquals("", driver.findElement(By.cssSelector("img.small-logo")).getText());
-            assertEquals("", driver.findElement(By.cssSelector("i.fa.fa-bars")).getText());
-            assertEquals("", driver.findElement(By.cssSelector("img.img-circle.img30_30")).getText());
-            assertEquals("Flowbanc", driver.getTitle());
-        //otro tipo de mensaje
-     
-        logger.info("log correcto");
+            
+      }//fin del A3logcorrecto
       
-        //veryfy de que entraste
-        try {
-            assertEquals("Statistics", driver.findElement(By.cssSelector("h4.hidden-xs")).getText());
-          } catch (Error e) {
-            verificationErrors.append(e.toString());
-            logger.error("ERROR: "+e.toString());
-          }
-          try {
-            assertEquals("Accounts Receivable", driver.findElement(By.xpath("//section[@id='content']/div/div/div[2]/div/h4")).getText());
-          } catch (Error e) {
-            verificationErrors.append(e.toString());
-            logger.error("ERROR: "+e.toString());
-          }
-          try {
-            assertEquals("Accounts Payable", driver.findElement(By.xpath("//section[@id='content']/div/div/div[3]/div/h4")).getText());
-          } catch (Error e) {
-            verificationErrors.append(e.toString());
-            logger.error("ERROR: "+e.toString());
-          }
-        
 
-        
-          
-          
-          
-      }//fin del logcorrecto
       
       
     //@After
       public void tearDown() throws Exception {
     	    driver.quit();
-    	    
-    	    //ACA ES PARA DAR EL ERROR CON TODOS LOS VERIFY
-    	    //String verificationErrorString = verificationErrors.toString();
-    	    //if (!"".equals(verificationErrorString)) {
-    	    //  fail(verificationErrorString);*/
-    	   // }
+
     	  }
     
       
       
-      /*
-       * driver.get(baseUrl + "chrome://web-developer/content/generated/view-color-information.html");
- 
-assertEquals("#a1513c", driver.findElement(By.xpath("//div[@id='content']/div/div[11]/span")).getText());
   
-assertTrue(isElementPresent(By.xpath("//input[@type='username']")));
-
-
-assertEquals("", driver.findElement(By.xpath("//input[")).getAttribute("type='password']"));
-  }
-
-  
-                <form class="form-horizontal ng-valid ng-dirty">
-                    <fieldset>
-                        <div class="form-group" data-ng-class="{'has-error':invalidEmail}">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            <input style="" class="form-control input-lg input-round text-center ng-valid ng-dirty" placeholder="Email" data-ng-model="username" data-ng-keyup="$event.keyCode == 13 &amp;&amp; signin(username, password)" type="username">
-                        </div>
-                        <div class="form-group has-error" data-ng-class="{'has-error':invalidPassword}">
-                            <span class="glyphicon glyphicon-lock"></span>
-                            <input class="form-control input-lg input-round text-center ng-pristine ng-valid" placeholder="Password" data-ng-model="password" data-ng-keyup="$event.keyCode == 13 &amp;&amp; signin(username, password)" type="password">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-lg btn-round btn-block text-center" data-ng-click="signin(username, password)">Log in</button>
-                        </div>
-                    </fieldset>
-                </form>
-                
-                
-*/
-      
-      
       
       
       
