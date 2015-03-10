@@ -1,0 +1,57 @@
+INFO - fin del setup
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: Elemento no esta presentejava.lang.AssertionError
+INFO - Entro en el metodo A3recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+INFO - Entro en el metodo A3recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: Elemento no esta presentejava.lang.AssertionError
+INFO - Entro en el metodo A3recordarcontraseña
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: Elemento no esta presentejava.lang.AssertionError
+INFO - Entro en el metodo A3recordarcontraseña
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[An email has been sent to you with a verification link].> but was:<[Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password].>
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: Elemento no esta presentejava.lang.AssertionError
+INFO - Entro en el metodo A3recordarcontraseña
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[An email has been sent to you with a verification link].> but was:<[Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password].>
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<...reset your password.[]> but was:<...reset your password.[
+Reset]>
+INFO - Entro en el metodo A3recordarcontraseña
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[An email has been sent to you with a verification link].> but was:<[Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password].>
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<...reset your password.[]> but was:<...reset your password.[
+Reset]>
+INFO - Entro en el metodo A3recordarcontraseña
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<[]An email has been se...> but was:<[×
+Close
+]An email has been se...>
+INFO - fin del setup
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: org.junit.ComparisonFailure: expected:<...reset your password.[]> but was:<...reset your password.[
+Reset]>
+INFO - Entro en el metodo A3recordarcontraseña

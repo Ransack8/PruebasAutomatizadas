@@ -66,11 +66,12 @@ public class Flowbanc{
       public static String baseUrl;
       public static WebDriverWait wait;
       //declaracion del string de errores y para el random     
-      private StringBuffer verificationErrors = new StringBuffer();
+
       static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       static Random rnd = new Random();
       private boolean acceptNextAlert = true;
-     //captura de pantalla
+     
+      //captura de pantalla
       String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm ").format(new Date());
       MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\Flowbanc\\",filetimestamp);
   		public String metodo = null;
@@ -251,7 +252,7 @@ public class Flowbanc{
 
    
       
-     //@Test    
+    // @Test    
       public void A1verificarloging()throws Exception{
     	 control("A1verificarloging");
          //maximze the window
@@ -264,6 +265,8 @@ public class Flowbanc{
         driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
  	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
  	 	verificatxt("×\nClose\nInvalid username or password.", By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+ 	 	 captura("//section[@id='content']/div/div[2]/div/div/section/div");
+ 	 	 captura();
  	 	//falta el que leer el mensaje
     	
  	 	//usuario vacio
@@ -273,42 +276,62 @@ public class Flowbanc{
         driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
         driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
         estapresente(By.xpath("//div[@class='form-group has-error']"));
-
+        captura();
  	 	//pass vacio
  	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
         driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
         driver.findElement(By.xpath("//input[@type='password']")).clear();
         driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
         estapresente(By.xpath("//div[@class='form-group has-error']"));
-
+        captura();
    	    //ambos vacios
         driver.findElement(By.xpath("//input[@type='username']")).clear();
         driver.findElement(By.xpath("//input[@type='password']")).clear();
         driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
         estapresente(By.xpath("//div[@class='form-group has-error']"));
-                    
+        captura();  
       }//fin del A1verificarloging
       
          
      @Test    
-     public void A2recordarcontraseña()throws Exception{
-   	 control("A2recordarcontraseña");     	 
+     public void A2recordarcontraseñainvalida()throws Exception{
+   	 control("A2A2recordarcontraseñainvalida");     	 
    	 driver.findElement(By.linkText("Forgot your password?")).click();
 	 Thread.sleep(1000);
-   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.cssSelector("p.text-small"));
+   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.xpath("//section[@id='content']"));
 	 verificatxt("Reset",By.linkText("Reset"));
 
-
+	 		//datos invalidos
            driver.findElement(By.xpath("//input[@type='email']")).clear();
-           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
+           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("saea.dsd@synergy-gb.com");  
+           estapresente(By.xpath("//div[@class='form-group has-error']"));
            driver.findElement(By.linkText("Reset")).click();
            captura();
 
            
            
+           
      }//fin del A2recordarcontraseña
      
-     
+     @Test    
+     public void A3recordarcontraseña()throws Exception{
+   	 control("A3recordarcontraseña");     	 
+
+   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.cssSelector("p.text-small"));
+	 verificatxt("Reset",By.linkText("Reset"));
+
+	 		//datos validos
+           driver.findElement(By.xpath("//input[@type='email']")).clear();
+           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
+           driver.findElement(By.linkText("Reset")).click();
+           captura();
+      	 Thread.sleep(1000);
+           verificatxt("×\nClose\nAn email has been sent to you with a verification link.",By.xpath("//section[@id='content']/div/div[3]/section/div"));
+
+           
+           
+           
+     }//fin del A3recordarcontraseña
      
      
      
