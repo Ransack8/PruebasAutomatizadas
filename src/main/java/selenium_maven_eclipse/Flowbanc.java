@@ -145,6 +145,12 @@ public class Flowbanc{
 	
 	}	
 	
+	public void captura (By by) throws IOException{
+
+		mShot.elementScreenShot(driver, driver.findElement(by));
+	
+	}	
+	
 	public void captura () throws IOException{
 		
 	mShot.multiScreenShot(driver);
@@ -252,7 +258,7 @@ public class Flowbanc{
 
    
       
-    // @Test    
+    @Test    
       public void A1verificarloging()throws Exception{
     	 control("A1verificarloging");
          //maximze the window
@@ -298,14 +304,13 @@ public class Flowbanc{
    	 control("A2A2recordarcontraseñainvalida");     	 
    	 driver.findElement(By.linkText("Forgot your password?")).click();
 	 Thread.sleep(1000);
-   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.xpath("//section[@id='content']"));
-	 verificatxt("Reset",By.linkText("Reset"));
+   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
+	 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
 
 	 		//datos invalidos
            driver.findElement(By.xpath("//input[@type='email']")).clear();
-           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("saea.dsd@synergy-gb.com");  
-           estapresente(By.xpath("//div[@class='form-group has-error']"));
            driver.findElement(By.linkText("Reset")).click();
+           estapresente(By.xpath("//div[@class='form-group has-error']"));
            captura();
 
            
@@ -314,12 +319,10 @@ public class Flowbanc{
      }//fin del A2recordarcontraseña
      
      @Test    
-     public void A3recordarcontraseña()throws Exception{
-   	 control("A3recordarcontraseña");     	 
-
-   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.",By.cssSelector("p.text-small"));
-	 verificatxt("Reset",By.linkText("Reset"));
-
+     public void A4recordarcontraseña()throws Exception{
+   	 control("A4recordarcontraseña");     	 
+   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
+	 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
 	 		//datos validos
            driver.findElement(By.xpath("//input[@type='email']")).clear();
            driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
@@ -335,21 +338,21 @@ public class Flowbanc{
      
      
      
-     //@Test    
-      public void A3logcorrecto()throws Exception{
-    	 control("A3logcorrecto");     	 
+     @Test    
+      public void A5logcorrecto()throws Exception{
+    	 control("A5logcorrecto");     	 
     	 driver.get(baseUrl);
     	 
-    	 verificatxt("Log in","(//button[@type='button'])[2]");
+    	 verificatxt("Log in","//section[@id='content']/div/div[2]/div/div/form/fieldset/div[3]/button");
     	 verificatxt("Don't have an account yet? Sign up","//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
-    	 verificatxt("Forgot your password?",By.linkText("Forgot your password?"));
+    	 verificatxt("Forgot your password?","//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
 
 
           
             driver.findElement(By.xpath("//input[@type='username']")).clear();
             driver.findElement(By.xpath("//input[@type='username']")).sendKeys("juan.rodriguez@synergy-gb.com");
             driver.findElement(By.xpath("//input[@type='password']")).clear();
-            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("prueba");            
+            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("sgb123456");            
             driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 
             
