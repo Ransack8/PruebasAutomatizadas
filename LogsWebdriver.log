@@ -11,3 +11,14 @@ ERROR - ERROR: org.junit.ComparisonFailure: expected:<[o]nter your email addr...
 INFO - Entro en el metodo A4recordarcontraseña
 INFO - Entro en el metodo A5logcorrecto
 INFO - fin del setup
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+INFO - Entro en el metodo A4recordarcontraseña
+INFO - Entro en el metodo A5logcorrecto
+INFO - fin del setup
+INFO - Entro en el metodo A1verificarloging
+INFO - Entro en el metodo A2A2recordarcontraseñainvalida
+ERROR - ERROR: Elemento no esta presentejava.lang.AssertionError
+INFO - Entro en el metodo A4recordarcontraseña
+INFO - Entro en el metodo A5logcorrecto

@@ -73,7 +73,7 @@ public class Flowbanc{
      
       //captura de pantalla
       String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm ").format(new Date());
-      MultiScreenShot mShot=new MultiScreenShot("C:\\Users\\Silfredo Mora\\workspace\\Capturas de pantalla y logs\\Flowbanc\\",filetimestamp);
+      MultiScreenShot mShot=new MultiScreenShot("C:\\Capturas de pantalla y logs\\Flowbanc\\",filetimestamp);
   		public String metodo = null;
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
@@ -95,7 +95,6 @@ public class Flowbanc{
           assertEquals(que, driver.findElement(by).getText());
         }
   	}
-  	
   	public void verificatxt(String que , String donde){
   	  	
         try {
@@ -118,8 +117,7 @@ public class Flowbanc{
   
   
   	}
-  
-  	public void estanopresente(By by){
+   	public void estanopresente(By by){
   
    	 try {
          assertFalse(isElementPresent(by));
@@ -130,36 +128,28 @@ public class Flowbanc{
   	  
   
   	}
-  	
-  	
-  
-  	public void control(String cualmetodo){
+ 	public void control(String cualmetodo){
 		logger.info("Entro en el metodo "+cualmetodo);
 		metodo = null;
 		metodo = cualmetodo;		
 		}
-	
 	public void captura (String path) throws IOException{
 
 		mShot.elementScreenShot(driver, driver.findElement(By.xpath(path)));
 	
 	}	
-	
 	public void captura (By by) throws IOException{
 
 		mShot.elementScreenShot(driver, driver.findElement(by));
 	
 	}	
-	
 	public void captura () throws IOException{
 		
 	mShot.multiScreenShot(driver);
 	
 	
 	}
-
-	
-	//para saber si esta presente un elemento
+//para saber si esta presente un elemento
 	  private boolean isElementPresent(By by) {
 		    try {
 		      driver.findElement(by);
@@ -193,7 +183,6 @@ public class Flowbanc{
 		    }
 		  }
 	  
-	  
 	//metodo de random
 	  public String randomString( int len ) 
 	  {
@@ -203,9 +192,6 @@ public class Flowbanc{
 	     return sb.toString();
 	  }
 	    
-
-      
-      
       //la anotación BeforeClass son las cosas que se ejecutan antes de la prueba
       @BeforeClass
       public static void setUp() throws Exception {          
@@ -236,9 +222,7 @@ public class Flowbanc{
          * driver = new InternetExplorerDriver(capab);
          * baseUrl = "https://login.live.com/";
          * driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);*/
-       
-          
-          
+         
           //<<<<<WebDriver>>>>>
           //default para FIREFOX  
           driver = new FirefoxDriver();
@@ -255,9 +239,7 @@ public class Flowbanc{
           JUnitCore junit = new JUnitCore();          
           junit.run(Flowbanc.class);
       }
-
-   
-      
+     
     @Test    
       public void A1verificarloging()throws Exception{
     	 control("A1verificarloging");
