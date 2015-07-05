@@ -237,7 +237,7 @@ public class Prore {
 	          //<<<<<WebDriver>>>>>
 	          //default para FIREFOX  
 	          driver = new FirefoxDriver();
-	          baseUrl = "https://www.google.co.ve/";
+	          baseUrl = "http://synergy-gb.com/";
 	          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    	  driver.get(baseUrl);    	  
 	    	  logger.info("fin del setup");
@@ -268,44 +268,24 @@ public class Prore {
 	     
 	    @Test    
 	      public void A1verificartextosesplogin()throws Exception{
-	    	 control("A1verificartextosesplogin");
+	    	 control("A1buscar");
 	    	 captura();
 	         //maximze the window
 	         driver.manage().window().maximize();
 	    	 Thread.sleep(2000);
-	    	    	 
-	    	//reviso imagenes
-	     	estapresente(By.cssSelector(Textos.imagenlogo)); 
-	     	estapresente(By.cssSelector(Textos.imagencentrallogin));
-	     	estapresente(By.cssSelector(Textos.imagenventures));
-	       	//capturas de logos
-	     	captura(By.cssSelector(Textos.imagenlogo));
-	     	captura(By.cssSelector(Textos.imagencentrallogin));
-	     	captura(By.cssSelector(Textos.imagenventures));
-
-	     	//reviso textos esp     	
-	   	 	verificatxt(Textos.ingreseasucuenta, By.xpath("//h4"));
-	   	 	verificatxt(Textos.idioma, By.xpath("//a[@id='dropdown-label']"));
-	   	 	verificatxt(Textos.ayuda, By.xpath("//a[contains(@href, 'https://confluence.synergy-gb.com/display/SOCIALPLUS/Manual+de+Usuario')]"));
-	   	 	verificatxt(Textos.olvidocontraseña, By.xpath("//a[contains(@href, '/resetting/request')]"));
-	   	 	verificatxt(Textos.copyright, By.cssSelector("p.copyright"));
-	   	 	verificatxt(Textos.entrar, By.xpath("//form[@id='loginForm']/button"));
-	   	 	
+	 		verificatxt(Textos.nuestrosclientes, By.xpath("//li[@id='menu-item-1722']/a"));  
 	   	 	captura();
 	     
-	      }//fin del A1verificartextosesplogin
+	      }//fin del A1buscar
 	      
 	         
 	     @Test    
 	     public void A2recordarcontraseña()throws Exception{
-	   	 control("A2A2recordarcontraseñainvalida");     	 
-	   	 
+	   	 control("A2A2recordarcontraseñainvalida");  
+		   	captura("//div[@id='slideshow']/a/img");
+	 	verificatxt(Textos.nuestrosclientes, By.xpath("//li[@id='menu-item-1324']/a"));  
+
 		 	
-	    // driver.findElement(By.xpath("//input[@id='usernameFake']")).sendKeys("asd");
-	     //driver.findElement(By.xpath("//input[@id='password']")).sendKeys("12345678");
-	    // driver.findElement(By.xpath("//button[@id='_submit']")).click();
-		//	estapresente(By.xpath("//form[@id='loginForm']/div[3]"));      
-	           
 	              }
 
 	     
@@ -315,50 +295,8 @@ public class Prore {
 	   	 
 		 	
 	    driver.findElement(By.xpath("//input[@id='usernameFake']")).sendKeys("asd");
-	    driver.findElement(By.xpath("//input[@id='password']")).sendKeys("12345678");
-	    driver.findElement(By.xpath("//button[@id='_submit']")).click();
-		estapresente(By.xpath("//form[@id='loginForm']/div[3]")); 
-		verificatxt(Textos.advertenciausuarioclaveinvalida, By.xpath("//form[@id='loginForm']/div[3]"));  
-		captura();
-	    }
+	   	    }
 	     
-	     @Test    
-	     public void A4comparacionfallida()throws Exception{
-	   	 control("A4comparacionfallida"); 
-	   	captura();
-	   	 verificatxt("Esto es un error de comparacion", By.xpath("//form[@id='loginForm']/div[3]")); 
-	   	
-	     }
-	     
-	     @Test    
-	     public void A5asertfallido()throws Exception{
-	   	 control("A5asertfallido"); 
-	   	captura();
-	   	 estanopresente(By.xpath("//form[@id='loginForm']/div[3]"));  
-	   	
-	     }
-	     
-	     @Test    
-	     public void A6asertfallido()throws Exception{
-	   	 control("A6asertfallido");  
-	   	captura();
-	   	 estanopresente(By.xpath("//form[@id='loginForm']/div[3]"));      
-	     }
-	     
-	     @Test    
-	     public void A7noencuentraelemento()throws Exception{
-	   	 control("A7asertfallido");  
-	   	captura();
-	   	driver.findElement(By.xpath("7"));   
-	     }
-
-	     
-	     @Test    
-	     public void A8ultimosifunciona()throws Exception{
-	   	 control("A8ultimosifunciona");  
-	   	verificatxt(Textos.advertenciausuarioclaveinvalida, By.xpath("//form[@id='loginForm']/div[3]"));
-	  
-	     }
 	     
 	     
 	      

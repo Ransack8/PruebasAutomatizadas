@@ -2,7 +2,7 @@ package selenium_maven_eclipse;
 
 public class Textos{
 
-	public static final String ingreseasucuenta = "Ingrese a su cuenta";
+	public static final String nuestrosclientes = "Nuestros Clientes";
 	public static final String idioma = "Idioma";
 	public static final String  ayuda = "Ayuda";
 	public static final String  olvidocontraseña = "¿Olvidó su contraseña?";
