@@ -57,11 +57,10 @@ public class PruebasProre {
       //declaracion del string de errores y para el random     
 
       private boolean acceptNextAlert = true;
-    //para el timestamp si lo queremos
-      String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
+
       
       //captura de pantalla aca ponemos la tura y la clase que estamos probando
-      MultiScreenShot mShot=new MultiScreenShot(ruta,filetimestamp + File.separator);
+      MultiScreenShot mShot=new MultiScreenShot(ruta,Prore.filetimestamp + File.separator);
   	
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
