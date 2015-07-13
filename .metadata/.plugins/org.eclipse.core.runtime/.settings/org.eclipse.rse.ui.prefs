@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 org.eclipse.rse.preferences.order.connections=desarrollo13.Local
+=======
+org.eclipse.rse.preferences.order.connections=user.Local
+>>>>>>> prore-pruebareporte

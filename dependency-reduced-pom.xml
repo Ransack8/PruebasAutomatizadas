@@ -25,10 +25,20 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>selenium_maven_eclipse.WebdriverTest</mainClass>
+              <mainClass>selenium_maven_eclipse.Prore</mainClass>
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-module-markdown</artifactId>
+            <version>1.1.4</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -44,7 +54,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>selenium_maven_eclipse.WebdriverTest</mainClass>
+              <mainClass>selenium_maven_eclipse.Prore</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>.</Class-Path>
@@ -75,7 +85,7 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-server</artifactId>
-      <version>2.44.0</version>
+      <version>2.46.0</version>
       <type>pom</type>
       <scope>compile</scope>
     </dependency>

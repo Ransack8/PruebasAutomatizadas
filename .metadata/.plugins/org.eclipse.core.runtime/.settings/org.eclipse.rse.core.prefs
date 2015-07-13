@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 org.eclipse.rse.systemtype.local.systemType.defaultUserId=JRodriguez
 useridperkey=desarrollo13.Local\=JRodriguez;
+=======
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=Silfredo Mora
+>>>>>>> prore-pruebareporte
