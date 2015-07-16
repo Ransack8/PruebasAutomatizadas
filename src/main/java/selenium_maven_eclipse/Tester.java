@@ -9,12 +9,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Prore {
+public class Tester {
 
 	
     //para el timestamp si lo queremos
     public static String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
-	static String ruta = "Resultados de pruebas"+File.separator+"Prore"+ File.separator;
+	static String ruta = "Resultados de pruebas"+File.separator+"ooflow"+ File.separator;
 
 	//este es el main
 	public static void main(String[] args) throws Exception{ 
@@ -32,15 +32,11 @@ public class Prore {
 		type.setValue("xml");
 		formater.setType(type);
 		task.addFormatter(formater);
-		JUnitTest test = new JUnitTest(PruebasProre.class.getName());// set Test.class.getname() 
+		JUnitTest test = new JUnitTest(PruebasOoflow.class.getName());// set Test.class.getname() 
 		test.setTodir(reportDir); // set Location for your report
 		task.addTest(test);         
 		task.execute();
 				
-
-		//junit.run(PruebasProre.class);
-		//Result result = JUnitCore.runClasses(PruebasProre.class);
-
 	} 
 
 

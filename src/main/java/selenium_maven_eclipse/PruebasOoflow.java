@@ -4,6 +4,7 @@ package selenium_maven_eclipse;
 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+
 import static org.junit.Assert.*;
 
 //import de seleniums
@@ -27,6 +28,7 @@ import java.util.Random;
 //permite definir una espera o delay mientras carga un elemento
 import java.util.concurrent.TimeUnit;
 
+
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -42,13 +44,14 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 //imports para manejo de assert con alertas
 
+
 //para los time stamp
 import java.util.Date;
 
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PruebasProre {
-	static String ruta = "Resultados de pruebas"+File.separator+"Prore"+ File.separator;
+public class PruebasOoflow {
+	static String ruta = "Resultados de pruebas"+File.separator+"Ooflow"+ File.separator;
  	
     //declaracion del webdriver y la direccion de la pagina
       public static WebDriver driver;
@@ -60,13 +63,11 @@ public class PruebasProre {
 
       
       //captura de pantalla aca ponemos la tura y la clase que estamos probando
-      MultiScreenShot mShot=new MultiScreenShot(ruta,Prore.filetimestamp + File.separator);
+      MultiScreenShot mShot=new MultiScreenShot(ruta,Tester.filetimestamp + File.separator);
   	
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
-      
-
-      
+       
   	/**
   	 * 	verifica texto manda mensajes al log y error al junit
   	 * @param que texto a verificar
@@ -211,7 +212,7 @@ public class PruebasProre {
 	          //<<<<<WebDriver>>>>>
 	          //default para FIREFOX  
 	          driver = new FirefoxDriver();
-	          baseUrl = "http://synergy-gb.com/";
+	          baseUrl = "https://ooflow.herokuapp.com";
 	          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    	  driver.get(baseUrl);    	  
 	    	  logger.info("fin del setup");
@@ -220,106 +221,126 @@ public class PruebasProre {
 	      
 	      }//cierre del setup
 
-	      //este es el main
-	      public static void main(String[] args) throws IOException{ 
-	    	  
-	    	  /*
-	          JUnitCore junit = new JUnitCore();          
-	          junit.run(PruebasProre.class);
-	          Result result = JUnitCore.runClasses(PruebasProre.class);
-	    	   
-	     	  
-
-	          
-	  	    for (Failure failure : result.getFailures()) {
-	            logger.error(failure.toString());
-	         }
-	        	logger.error(result.wasSuccessful());
-	        	
-	        	logger.info("se ejecutaron " + result.getRunCount()+" casos de prueba");
-	        	logger.info("fallaron " + result.getFailureCount()+" casos de prueba");
-	        	*/
-	      }
-	     
 	      
-	    @Test    
-	      public void A1verificartextosesplogin()throws Exception{
-	    	 control("A1buscar");
-	    	 captura();
+	      
+	      
+	      @Test    
+	      public void A1verificarlogingincorrecto()throws Exception{
+	    	 control("A1verificarlogingincorrecto");
 	         //maximze the window
 	         driver.manage().window().maximize();
-	    	 Thread.sleep(2000);
-	 		verificatxt(Textos.nuestrosclientes, By.xpath("//li[@id='menu-item-1722']/a"));  
-	   	 	captura();
-	     
-	      }//fin del A1buscar
+	         captura();
+	                 
+	        // caso ambos llenos pero incorrectos
+	    	estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+	        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+	        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	 	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
+	 	 	verificatxt(Textos.usuariooclaveinvalido, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+	 	 	captura("//section[@id='content']/div/div/section/a/img");
+	 	 	Thread.sleep(1000);
+	 	 	 
+	 	 	
+	    	
+	 	 	//usuario vacio
+	 		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+	 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+	        driver.findElement(By.xpath("//input[@type='password']")).clear();
+	        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	        estapresente(By.xpath("//div[@class='form-group has-error']"));
+	       
+	 	 	//pass vacio
+	 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+	        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+	        driver.findElement(By.xpath("//input[@type='password']")).clear();
+	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	        estapresente(By.xpath("//div[@class='form-group has-error']"));
+	        
+	   	    //ambos vacios
+	        driver.findElement(By.xpath("//input[@type='username']")).clear();
+	        driver.findElement(By.xpath("//input[@type='password']")).clear();
+	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	        estapresente(By.xpath("//div[@class='form-group has-error']"));
+	        
+	      }
 	      
 	         
 	     @Test    
-	     public void A2recordarcontraseña()throws Exception{
-	   	 control("A2A2recordarcontraseñainvalida");  
-		   	captura("//div[@id='slideshow']/a/img");
-	 	verificatxt(Textos.nuestrosclientes, By.xpath("//li[@id='menu-item-1324']/a"));  
+	     public void A2recordarcontraseñainvalida()throws Exception{
+	   	 control("A2A2recordarcontraseñainvalida");     	 
+	   	 driver.findElement(By.linkText("Forgot your password?")).click();
+		 Thread.sleep(2000);
+		 captura();
+	   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
+		 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
 
-		 	
-	              }
+		 //datos invalidos
+	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("correoinvalido@dominio.com");
+	     driver.findElement(By.linkText("Reset")).click();
+	     
+	     
 
 	     
-	     @Test    
-	     public void A3logininvalido()throws Exception{
-	   	 control("A3logininvalido");     	 
-	   	 
-		 	
-	    driver.findElement(By.xpath("//input[@id='usernameFake']")).sendKeys("asd");
-	   	    }
+
+	           
+	           
+	           
+	     }//fin del A2recordarcontraseña
+	     
+	     //@Test    
+	     public void A4recordarcontraseña()throws Exception{
+	   	 control("A4recordarcontraseña");     	 
+	   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
+		 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
+		 		//datos validos
+	           driver.findElement(By.xpath("//input[@type='email']")).clear();
+	           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
+	           driver.findElement(By.linkText("Reset")).click();
+	           captura();
+	      	 Thread.sleep(1000);
+	           verificatxt("×\nClose\nAn email has been sent to you with a verification link.",By.xpath("//section[@id='content']/div/div[3]/section/div"));
+
+	           
+	           
+	           
+	     }//fin del A3recordarcontraseña
 	     
 	     
 	     
-	      
-	     
-	     
-	     
-	     @AfterClass
-	      public static void tearDown() throws Exception {
-	    	    driver.quit();
+	     //@Test    
+	      public void A5logcorrecto()throws Exception{
+	    	 control("A5logcorrecto");     	 
+	    	 driver.get(baseUrl);
+	    	 
+	    	 verificatxt("Log in","//section[@id='content']/div/div[2]/div/div/form/fieldset/div[3]/button");
+	    	 verificatxt("Don't have an account yet? Sign up","//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
+	    	 verificatxt("Forgot your password?","//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
+
+
+	          
+	            driver.findElement(By.xpath("//input[@type='username']")).clear();
+	            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("juan.rodriguez@synergy-gb.com");
+	            driver.findElement(By.xpath("//input[@type='password']")).clear();
+	            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("sgb123456");            
+	            driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+
 	            
+	            
+	      }//fin del A3logcorrecto
+	      
 
+	      
+	      
+	    //@After
+	      public void tearDown() throws Exception {
+	    	    driver.quit();
 
 	    	  }
 	    
 	      
-	
-	     
-
-	          
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	 
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
+	      
 	  
 	      
 	      
