@@ -224,13 +224,15 @@ public class PruebasOoflow {
 	      
 	      
 	      
-	      @Test    
+	      //@Test    
 	      public void A1verificarlogingincorrecto()throws Exception{
 	    	 control("A1verificarlogingincorrecto");
 	         //maximze the window
 	         driver.manage().window().maximize();
-	         captura();
-	                 
+	         
+	         
+	         
+	         captura();	        
 	        // caso ambos llenos pero incorrectos
 	    	estanopresente(By.xpath("//div[@class='form-group has-error']")); 
 	        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
@@ -238,10 +240,7 @@ public class PruebasOoflow {
 	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	 	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
 	 	 	verificatxt(Textos.usuariooclaveinvalido, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
-	 	 	captura("//section[@id='content']/div/div/section/a/img");
-	 	 	Thread.sleep(1000);
-	 	 	 
-	 	 	
+	 	 	 	 	
 	    	
 	 	 	//usuario vacio
 	 		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
@@ -263,68 +262,74 @@ public class PruebasOoflow {
 	        driver.findElement(By.xpath("//input[@type='password']")).clear();
 	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	        estapresente(By.xpath("//div[@class='form-group has-error']"));
-	        
 	      }
 	      
 	         
-	     @Test    
-	     public void A2recordarcontraseñainvalida()throws Exception{
-	   	 control("A2A2recordarcontraseñainvalida");     	 
-	   	 driver.findElement(By.linkText("Forgot your password?")).click();
-		 Thread.sleep(2000);
-		 captura();
-	   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
-		 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
-
+	     //@Test    
+	     public void A2recordarclaveinvalida()throws Exception{
+	   	 control("A2A2recordarcontraseñainvalida");
+	   	 driver.manage().window().maximize();
+	   	 captura();
+	   	 verificatxt(Textos.forgotpassword,"//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
+	   	 verificatxt(Textos.donthaveaccount,"//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
+	   	 driver.findElement(By.linkText(Textos.forgotpassword)).click();
+		 Thread.sleep(1000);
+		 verificatxt(Textos.introducecorreo,By.xpath("//section[@id='content']"));
+		 verificatxt(Textos.reset,"//section[@id='content']/div/div[3]/form/div[2]/a");
+	   	 verificatxt(Textos.instruccionesrecuperacion,"//section[@id='content']/div/div[2]/p");
+	   	 
 		 //datos invalidos
 	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("correoinvalido@dominio.com");
 	     driver.findElement(By.linkText("Reset")).click();
-	     
-	     
-
-	     
-
+	     Thread.sleep(1000);
+	     verificatxt(Textos.errorrecoverpassword, By.xpath("//section[@id='content']/div/div[3]/section/div"));        
 	           
-	           
-	           
-	     }//fin del A2recordarcontraseña
-	     
-	     //@Test    
-	     public void A4recordarcontraseña()throws Exception{
-	   	 control("A4recordarcontraseña");     	 
-	   	 verificatxt("Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset",By.xpath("//section[@id='content']"));
-		 verificatxt("Reset","//section[@id='content']/div/div[3]/form/div[2]/a");
-		 		//datos validos
-	           driver.findElement(By.xpath("//input[@type='email']")).clear();
-	           driver.findElement(By.xpath("//input[@type='email']")).sendKeys("juan.rodriguez@synergy-gb.com");            
-	           driver.findElement(By.linkText("Reset")).click();
-	           captura();
-	      	 Thread.sleep(1000);
-	           verificatxt("×\nClose\nAn email has been sent to you with a verification link.",By.xpath("//section[@id='content']/div/div[3]/section/div"));
-
-	           
-	           
-	           
-	     }//fin del A3recordarcontraseña
-	     
+	     }
 	     
 	     
 	     //@Test    
-	      public void A5logcorrecto()throws Exception{
-	    	 control("A5logcorrecto");     	 
-	    	 driver.get(baseUrl);
+	     public void A3recordarclave()throws Exception{
+	   	 control("A3recordarclave");     
+	   	 
+	   	 
+	     //datos validos
+	     driver.findElement(By.xpath("//input[@type='email']")).clear();
+	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("movilidadsynergy@gmail.com");
+	     driver.findElement(By.linkText("Reset")).click();
+	     Thread.sleep(300);
+	     captura();
+	     verificatxt(Textos.emailsent, By.xpath("//section[@id='content']/div/div[3]/section/div"));
+         Thread.sleep(5000);
+	   	      
+	     }//fin del A3recordarclave
+	     
+	     
+	     
+	     @Test    
+	      public void A4signup()throws Exception{
+	    	 control("A4signup");     	 
+	    	 driver.manage().window().maximize();
+	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
+	    	 Thread.sleep(1000);
+	    	 verificatxt(Textos.termsandconditions, By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/p"));
+	    	 verificatxt(Textos.haveaccount, By.xpath("//section[@id='content']/div/div[2]/div/div/section[3]/p"));
+	    	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
+	    	 verificatxt("Log in", By.xpath("//section[@id='content']/div/div[2]/div/div/form/fieldset/div[3]/button"));
+	    	 estapresente(By.xpath("//a[contains(text(),'Sign up')]"));	    	
+	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
 	    	 
-	    	 verificatxt("Log in","//section[@id='content']/div/div[2]/div/div/form/fieldset/div[3]/button");
-	    	 verificatxt("Don't have an account yet? Sign up","//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
-	    	 verificatxt("Forgot your password?","//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
+	    	 
+	    	 //error al precionar sigup que cambia de pantalla
+	    	 captura();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+	    	 Thread.sleep(10);
+	    	 captura();
+	    	
 
-
+	    	 
+	    			
 	          
-	            driver.findElement(By.xpath("//input[@type='username']")).clear();
-	            driver.findElement(By.xpath("//input[@type='username']")).sendKeys("juan.rodriguez@synergy-gb.com");
-	            driver.findElement(By.xpath("//input[@type='password']")).clear();
-	            driver.findElement(By.xpath("//input[@type='password']")).sendKeys("sgb123456");            
-	            driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	       
 
 	            
 	            
