@@ -13,7 +13,10 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Keys;
@@ -23,10 +26,15 @@ import org.openqa.selenium.Alert;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.Random;
 
 //permite definir una espera o delay mientras carga un elemento
 import java.util.concurrent.TimeUnit;
+
+
+
+
 
 
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
@@ -43,6 +51,10 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.ExpectedConditions;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 //imports para manejo de assert con alertas
+
+
+
+
 
 
 //para los time stamp
@@ -173,7 +185,16 @@ public class PruebasOoflow {
 		  }
 	  
 
-		  
+		  public void verificaurl(String currenturl , String url){
+			  	
+		      try {
+		          assertEquals(currenturl, driver.getCurrentUrl());
+		        } catch (Error e) {
+		            //MANDANDO EL ERROR AL LOG y al junit
+		          logger.error("ERROR: "+e.toString());
+		          assertEquals(currenturl, driver.getCurrentUrl());
+		        }
+		  	}		  
 		  
 		  
 		  
@@ -209,12 +230,27 @@ public class PruebasOoflow {
 	         * baseUrl = "https://login.live.com/";
 	         * driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);*/
 	         
+	            
+           
+	            
+	            //System.setProperty("webdriver.chrome.driver", "."+File.separator+File.separator+"chromedriver.exe");
+	           // WebDriver driver = new ChromeDriver();
+  
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
 	          //<<<<<WebDriver>>>>>
 	          //default para FIREFOX  
 	          driver = new FirefoxDriver();
 	          baseUrl = "https://ooflow.herokuapp.com";
 	          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    	  driver.get(baseUrl);    	  
+	    	  driver.get(baseUrl);
+	    	  driver.manage().window().maximize();
 	    	  logger.info("fin del setup");
 	      
 	     
@@ -225,14 +261,12 @@ public class PruebasOoflow {
 	      
 	      
 	      //@Test    
-	      public void A1verificarlogingincorrecto()throws Exception{
-	    	 control("A1verificarlogingincorrecto");
-	         //maximze the window
-	         driver.manage().window().maximize();
+	      public void A1verificarloginincorrecto()throws Exception{
+	    	 control("A1verificarloginincorrecto");
+	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
 	         
 	         
-	         
-	         captura();	        
+	              
 	        // caso ambos llenos pero incorrectos
 	    	estanopresente(By.xpath("//div[@class='form-group has-error']")); 
 	        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
@@ -240,7 +274,7 @@ public class PruebasOoflow {
 	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	 	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
 	 	 	verificatxt(Textos.usuariooclaveinvalido, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
-	 	 	 	 	
+	 	 		 	
 	    	
 	 	 	//usuario vacio
 	 		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
@@ -262,18 +296,19 @@ public class PruebasOoflow {
 	        driver.findElement(By.xpath("//input[@type='password']")).clear();
 	        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	        estapresente(By.xpath("//div[@class='form-group has-error']"));
+	        
 	      }
 	      
 	         
 	     //@Test    
-	     public void A2recordarclaveinvalida()throws Exception{
-	   	 control("A2A2recordarcontraseñainvalida");
-	   	 driver.manage().window().maximize();
-	   	 captura();
+	     public void A2recordarclave()throws Exception{
+	   	 control("A2recordarclave");
+	   	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
 	   	 verificatxt(Textos.forgotpassword,"//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
 	   	 verificatxt(Textos.donthaveaccount,"//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
 	   	 driver.findElement(By.linkText(Textos.forgotpassword)).click();
-		 Thread.sleep(1000);
+		 Thread.sleep(300);
+		 verificaurl(driver.getCurrentUrl(),Textos.forgotpassURL);
 		 verificatxt(Textos.introducecorreo,By.xpath("//section[@id='content']"));
 		 verificatxt(Textos.reset,"//section[@id='content']/div/div[3]/form/div[2]/a");
 	   	 verificatxt(Textos.instruccionesrecuperacion,"//section[@id='content']/div/div[2]/p");
@@ -283,57 +318,151 @@ public class PruebasOoflow {
 	     driver.findElement(By.linkText("Reset")).click();
 	     Thread.sleep(1000);
 	     verificatxt(Textos.errorrecoverpassword, By.xpath("//section[@id='content']/div/div[3]/section/div"));        
-	           
-	     }
-	     
-	     
-	     //@Test    
-	     public void A3recordarclave()throws Exception{
-	   	 control("A3recordarclave");     
-	   	 
-	   	 
+	      
+	   	 verificaurl(driver.getCurrentUrl(),Textos.forgotpassURL);
 	     //datos validos
 	     driver.findElement(By.xpath("//input[@type='email']")).clear();
 	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("movilidadsynergy@gmail.com");
 	     driver.findElement(By.linkText("Reset")).click();
-	     Thread.sleep(300);
-	     captura();
+	     Thread.sleep(500);
 	     verificatxt(Textos.emailsent, By.xpath("//section[@id='content']/div/div[3]/section/div"));
          Thread.sleep(5000);
-	   	      
-	     }//fin del A3recordarclave
 	     
 	     
+	     }
 	     
-	     @Test    
-	      public void A4signup()throws Exception{
-	    	 control("A4signup");     	 
-	    	 driver.manage().window().maximize();
+	     
+  
+	     
+	     //@Test    
+	      public void A3signup()throws Exception{
+	    	 control("A3signup");     	 
+	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
 	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
-	    	 Thread.sleep(1000);
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.signupURL);
 	    	 verificatxt(Textos.termsandconditions, By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/p"));
 	    	 verificatxt(Textos.haveaccount, By.xpath("//section[@id='content']/div/div[2]/div/div/section[3]/p"));
 	    	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
-	    	 verificatxt("Log in", By.xpath("//section[@id='content']/div/div[2]/div/div/form/fieldset/div[3]/button"));
-	    	 estapresente(By.xpath("//a[contains(text(),'Sign up')]"));	    	
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 Thread.sleep(500);    	
 	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
+	    	 verificaurl(driver.getCurrentUrl(),Textos.signupURL);
 	    	 
+	    	 //casos de prueba de singup
+	    	 //casos posibles correos ya registrados, correos invalidos, correo vacio y registro exitoso
 	    	 
-	    	 //error al precionar sigup que cambia de pantalla
-	    	 captura();
+	    	 //caso correo invalido esta medio malo porque no reconoce la estructura de email por ahora
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfre");
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
 	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-	    	 Thread.sleep(10);
-	    	 captura();
-	    	
-
+	    	 estapresente(By.xpath("//div[@class='form-group has-error']"));
 	    	 
-	    			
-	          
-	       
+	    	 //caso clave vacia no tiene sentido invalida?
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+	    	 estapresente(By.xpath("//div[@class='form-group has-error']"));
+	    	 
+	    	 //caso ambas vacias
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+	    	 estapresente(By.xpath("//div[@class='form-group has-error']"));
+	    	 
+	    	 //regristro correo random
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys(Tester.filetimestamp+RandomStringGenerator.generateRandomString(5,RandomStringGenerator.Mode.ALPHANUMERIC)+"@dominio.com");
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys(RandomStringGenerator.generateRandomString(10,RandomStringGenerator.Mode.ALPHANUMERIC));
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+	    	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
+	    	 verificatxt(Textos.registroexitoso, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+	    	 
+	    	 //caso correo ya registrado
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+	    	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
+	    	 verificatxt(Textos.userexists, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+	    	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 
+	    	 
+	      }
+	     
+	     
+	      
+	      @Test   
+	      public void A4loginexitoso () throws Exception{
+	    	 control("A4loginexitoso");    	 
+	    		        
+		    	driver.findElement(By.xpath("//input[@type='username']")).sendKeys("silfredomora@gmail.com");
+		        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("synergy1234");
+		        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+		        verificaurl(driver.getCurrentUrl(),Textos.dashboardURL);
+		 	 	  	 
+	      }
+	      
+	      
+	      @Test   
+	      public void A5dashboard () throws Exception{
+	    	 control("A5dashboard"); 
+	    	 Thread.sleep(4000);
+	    	 verificatxt(Textos.cuentausuario, By.cssSelector("span.ng-binding"));
+	    	 verificatxt(Textos.statisticsbar, By.xpath("//section[@id='content']/div/div/div/div/h4"));
+	    	 verificatxt(Textos.accoutreceivable, By.xpath("//section[@id='content']/div/div/div[2]/div/h4"));
+	    	 verificatxt(Textos.accoutpayable, By.xpath("//section[@id='content']/div/div/div[3]/div/h4"));
+	    	 verificatxt(Textos.dashboardmenu, By.xpath("//ul[@id='nav']/li/a/span"));
+	    	 verificatxt(Textos.invoicesmenu, By.xpath("//ul[@id='nav']/li[2]/a/span"));
+	    	 driver.findElement(By.xpath("//ul[@id='nav']/li[2]/a/span")).click();
+	    	 Thread.sleep(500);
+	    	 verificatxt(Textos.newinvoicemenu, By.xpath("//ul[@id='nav']/li[2]/ul/li/a/span"));
+	    	 verificatxt(Textos.searchmenu, By.xpath("//ul[@id='nav']/li[2]/ul/li[2]/a/span"));
+	    	 verificatxt(Textos.draftsmenu, By.xpath("//ul[@id='nav']/li[2]/ul/li[3]/a/span"));
+	    	 verificatxt(Textos.connectionsmenu, By.xpath("//ul[@id='nav']/li[3]/a/span"));
+	    	 captura();
+	    	 verificatxt(Textos.currentinvoicesbox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div/div[2]/div/div/p[2]/span"));
+	    	 verificatxt(Textos.overduebox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div/div[3]/div/div/p[2]/span"));
+	    	 verificatxt(Textos.totalreceivablesbox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[3]/div/div/div/p[2]/span"));
+	    	 verificatxt(Textos.totalpayablesbox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[3]/div[2]/div/div/p[2]/span"));
+	    	 verificatxt(Textos.acceptedinvoucebox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[3]/div[3]/div/div/p[2]/span"));
+	    	 verificatxt(Textos.disputedbox, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[3]/div[4]/div/div/p[2]/span"));
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 Thread.sleep(1000);
+	    	 verificatxt(Textos.myprofilebar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a/span"));
+	    	 verificatxt(Textos.changepassbar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li[2]/a/span"));
+	    	 verificatxt(Textos.logoutbar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li[3]/a/span"));	        
 
-	            
-	            
-	      }//fin del A3logcorrecto
+		 	 	  	 
+	      }
+	      
+	      
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
 	      
 
 	      

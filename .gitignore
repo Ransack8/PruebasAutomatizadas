@@ -1,3 +1,4 @@
 /target
 *.log
 /Resultados de pruebas
+*.exe

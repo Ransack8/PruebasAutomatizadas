@@ -12,6 +12,42 @@ public class Textos{
 	public static final String  instruccionesrecuperacion = "Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.";
 	public static final String  termsandconditions = "By clicking on Sign up, you agree to terms & conditions and privacy policy";
 	public static final String  haveaccount = "Already have an account? Log in now";
+	public static final String  userexists = "×\nClose\nRegistration Failed. User already exists";
+	public static final String  registroexitoso = "×\nClose\n¡Registration Successful! Check your email for further instructions";
+	public static final String  login = "Log in";
+	public static final String  cuentausuario = "Silfredo";
+	public static final String  empresadeusuario = "Synergy";
+	public static final String  dashboardmenu = "Dashboard";
+	public static final String  invoicesmenu = "Invoices";
+	public static final String  connectionsmenu = "Connections";
+	public static final String  newinvoicemenu = "New Invoice";
+	public static final String  searchmenu = "Search";
+	public static final String  draftsmenu = "Drafts";
+	public static final String  statisticsbar = "Statistics";
+	public static final String  accoutreceivable = "Accounts Receivable";
+	public static final String  accoutpayable = "Accounts Payable";
+	public static final String  myprofilebar = "My Profile";
+	public static final String  changepassbar = "Change Password";
+	public static final String  logoutbar = "Log Out";
+	public static final String  totalreceivablesbox = "Total Receivables";
+	public static final String  totalpayablesbox = "Total Payables";
+	public static final String  acceptedinvoucebox = "Accepted Invoices";
+	public static final String  disputedbox = "Disputed or Rejected";
+	public static final String  currentinvoicesbox = "Current Invoices";
+	public static final String  overduebox = "Overdue Invoices";
+	
+	
+	
+	
+	
+	
+	
+	
+	public static final String loginURL = "https://ooflow.herokuapp.com/#/pages/signin";
+	public static final String forgotpassURL = "https://ooflow.herokuapp.com/#/pages/forgot-password";
+	public static final String signupURL = "https://ooflow.herokuapp.com/#/pages/signup";
+	public static final String dashboardURL = "https://ooflow.herokuapp.com/#/pages/profile";
+	
 	
 		
 	public static final String  imagenlogo = "img.social-logo";
