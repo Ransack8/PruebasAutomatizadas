@@ -1,5 +1,7 @@
 package selenium_maven_eclipse;
 
+import org.openqa.selenium.Dimension;
+
 public class Textos{
 
 	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or password.";
@@ -15,8 +17,14 @@ public class Textos{
 	public static final String  userexists = "×\nClose\nRegistration Failed. User already exists";
 	public static final String  registroexitoso = "×\nClose\n¡Registration Successful! Check your email for further instructions";
 	public static final String  login = "Log in";
+	//datos del usuario
 	public static final String  cuentausuario = "Silfredo";
-	public static final String  empresadeusuario = "Synergy";
+	public static final String  empresadeusuario = "SYNERGY";
+	public static final String  correoeusuario = "silfredomora@gmail.com";
+	public static final String  quehaceusuario = "Aplicaciones";
+	public static final String  direccion = "urb el encantado, Caracas, Distrito Capital, 10300, Venezuela";	
+	public static final String  telefono = "04123007453";	
+	//dashboard
 	public static final String  dashboardmenu = "Dashboard";
 	public static final String  invoicesmenu = "Invoices";
 	public static final String  connectionsmenu = "Connections";
@@ -35,8 +43,27 @@ public class Textos{
 	public static final String  disputedbox = "Disputed or Rejected";
 	public static final String  currentinvoicesbox = "Current Invoices";
 	public static final String  overduebox = "Overdue Invoices";
+	public static final String  grafica1titulo = "AR/AP BY TIMEFRAME";
+	public static final String  grafica2titulo = "AR AGING";
+	//My Profile
+	public static final String  generalinfo = "GENERAL INFO";
+	public static final String  logo = "Logo";
+	public static final String  savechanges = "Save Changes";
+	public static final String  addresses = "ADDRESSES";
+	public static final String  phonenumbers  = "PHONE NUMBERS";
+	public static final String  addaddress  = "Add address";
+	public static final String  addphone  = "Add phone";
+	public static final String  quickbooksintegration  = "QUICKBOOKS INTEGRATION";
 	
 	
+	
+	
+	
+	
+	
+	
+
+
 	
 	
 	
@@ -46,7 +73,10 @@ public class Textos{
 	public static final String loginURL = "https://ooflow.herokuapp.com/#/pages/signin";
 	public static final String forgotpassURL = "https://ooflow.herokuapp.com/#/pages/forgot-password";
 	public static final String signupURL = "https://ooflow.herokuapp.com/#/pages/signup";
-	public static final String dashboardURL = "https://ooflow.herokuapp.com/#/pages/profile";
+	public static final String dashboardURL = "https://ooflow.herokuapp.com/#/dashboard";
+	public static final String myprofileURL = "https://ooflow.herokuapp.com/#/pages/profile";
+	
+	
 	
 	
 		

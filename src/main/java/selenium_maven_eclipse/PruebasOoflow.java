@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 
 //import de seleniums
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -51,6 +53,7 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.ExpectedConditions;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 //imports para manejo de assert con alertas
+
 
 
 
@@ -440,13 +443,57 @@ public class PruebasOoflow {
 	    	 Thread.sleep(1000);
 	    	 verificatxt(Textos.myprofilebar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a/span"));
 	    	 verificatxt(Textos.changepassbar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li[2]/a/span"));
-	    	 verificatxt(Textos.logoutbar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li[3]/a/span"));	        
-
-		 	 	  	 
+	    	 verificatxt(Textos.logoutbar, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li[3]/a/span"));
+	    	 verificatxt(Textos.grafica1titulo, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[2]/div/div/div"));
+	    	 verificatxt(Textos.grafica2titulo, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div[2]/div[2]/div/div"));
+		 	 
+		 	
+		 	//chequeo el redimencionamiento del menu lateral con el primer elemento
+		 	 Dimension dashboardmenugrande= driver.findElement(By.xpath("//ul[@id='nav']/li/a/span")).getSize();		 	
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li/a")).click();
+	    	 Thread.sleep(1000);	    	 
+	    	 Dimension dashboardmenupequeño= driver.findElement(By.xpath("//ul[@id='nav']/li/a")).getSize();
+	    	 logger.info("menu lateral grande "+ dashboardmenugrande);
+	    	 logger.info("menu lateral pequeño "+ dashboardmenupequeño);
+	    	 assertTrue("Al reducir menu lateral no se redimenciono correctamente",dashboardmenugrande.width >= dashboardmenupequeño.width && dashboardmenugrande.height <= dashboardmenupequeño.height);
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li/a")).click();
+	    	     	 
+	    	 
 	      }
 	      
 	      
-	     
+	      @Test   
+	      public void A6myprofile() throws Exception{
+	    	 control("A6myprofile"); 
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 Thread.sleep(500);
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 verificatxt(Textos.empresadeusuario, By.xpath("//section[@id='content']/div/div/div/div/div/h3"));
+	    	 captura("//section[@id='content']/div/div/div/div/div/img");
+	    	 verificatxt(Textos.generalinfo, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div/strong"));
+	    	 verificatxt(Textos.logo, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div[2]/form/ul/li[2]/div/div/div/div"));
+	    	 verificatxt(Textos.savechanges, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[4]/button"));
+	    	 verificatxt(Textos.addresses, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div/strong"));
+	    	 verificatxt(Textos.phonenumbers, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div/strong"));
+	    	 verificatxt(Textos.addaddress, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/div/div/button"));
+	    	 verificatxt(Textos.addphone, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button"));
+	    	 verificatxt(Textos.quickbooksintegration, By.xpath("//section[@id='content']/div/div[2]/div/section/div/strong/span[2]"));
+	    	 
+	    	 
+	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
+	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
+	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
+	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
+	    	 
+
+	    	 
+	    	 
+	    	
+	    	 
+	      }
 	     
 	     
 	     
