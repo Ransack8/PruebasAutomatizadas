@@ -19,7 +19,7 @@ public class Textos{
 	public static final String  login = "Log in";
 	//datos del usuario
 	public static final String  cuentausuario = "Silfredo";
-	public static final String  empresadeusuario = "SYNERGY";
+	public static final String  empresadeusuario = "Synergy";
 	public static final String  correoeusuario = "silfredomora@gmail.com";
 	public static final String  quehaceusuario = "Aplicaciones";
 	public static final String  direccion = "urb el encantado, Caracas, Distrito Capital, 10300, Venezuela";	
@@ -46,7 +46,7 @@ public class Textos{
 	public static final String  grafica1titulo = "AR/AP BY TIMEFRAME";
 	public static final String  grafica2titulo = "AR AGING";
 	//My Profile
-	public static final String  generalinfo = "GENERAL INFO";
+	public static final String  generalinfo = "GENERAL INFO"; 
 	public static final String  logo = "Logo";
 	public static final String  savechanges = "Save Changes";
 	public static final String  addresses = "ADDRESSES";

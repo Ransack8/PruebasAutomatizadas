@@ -108,6 +108,28 @@ public class PruebasOoflow {
             assertEquals(que, driver.findElement(By.xpath(donde)).getText());
           }
     	}
+  	public void verificavalue(String que , String donde){
+  	  	
+        try {
+            assertEquals(que, driver.findElement(By.xpath(donde)).getAttribute("value"));
+          } catch (Error e) {
+              //MANDANDO EL ERROR AL LOG y al junit
+            logger.error("ERROR: "+e.toString());
+            assertEquals(que, driver.findElement(By.xpath(donde)).getAttribute("value"));
+          }
+    	}
+  	
+  	public void verificavalue(String que , By by ){
+  	  	
+        try {
+            assertEquals(que, driver.findElement(by).getAttribute("value"));
+          } catch (Error e) {
+              //MANDANDO EL ERROR AL LOG y al junit
+            logger.error("ERROR: "+e.toString());
+            assertEquals(que, driver.findElement(by).getAttribute("value"));
+          }
+    	}	
+  	
   	public void estapresente (By by){
   
         try {
@@ -327,7 +349,7 @@ public class PruebasOoflow {
 	     driver.findElement(By.xpath("//input[@type='email']")).clear();
 	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("movilidadsynergy@gmail.com");
 	     driver.findElement(By.linkText("Reset")).click();
-	     Thread.sleep(500);
+	     Thread.sleep(2000);
 	     verificatxt(Textos.emailsent, By.xpath("//section[@id='content']/div/div[3]/section/div"));
          Thread.sleep(5000);
 	     
@@ -415,7 +437,7 @@ public class PruebasOoflow {
 	      }
 	      
 	      
-	      @Test   
+	      //@Test   
 	      public void A5dashboard () throws Exception{
 	    	 control("A5dashboard"); 
 	    	 Thread.sleep(4000);
@@ -463,15 +485,15 @@ public class PruebasOoflow {
 	      
 	      
 	      @Test   
-	      public void A6myprofile() throws Exception{
-	    	 control("A6myprofile"); 
+	      public void A6myprofilegeneralinfo() throws Exception{
+	    	 control("A6myprofilegeneralinfo"); 
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
-	    	 Thread.sleep(500);
+	    	 Thread.sleep(300);
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
-	    	 Thread.sleep(500);
+	    	 Thread.sleep(300);
 	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
-	    	 verificatxt(Textos.empresadeusuario, By.xpath("//section[@id='content']/div/div/div/div/div/h3"));
+	    	 verificatxt(Textos.empresadeusuario.toUpperCase(), By.xpath("//section[@id='content']/div/div/div/div/div/h3"));
 	    	 captura("//section[@id='content']/div/div/div/div/div/img");
 	    	 verificatxt(Textos.generalinfo, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div/strong"));
 	    	 verificatxt(Textos.logo, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div[2]/form/ul/li[2]/div/div/div/div"));
@@ -482,20 +504,77 @@ public class PruebasOoflow {
 	    	 verificatxt(Textos.addphone, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button"));
 	    	 verificatxt(Textos.quickbooksintegration, By.xpath("//section[@id='content']/div/div[2]/div/section/div/strong/span[2]"));
 	    	 
-	    	 
-	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
-	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
-	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
-	    	 verificatxt(Textos.addresses, By.xpath("//ul[@id='nav']/li[3]/a/span"));
-	    	 
+	    	 //revision de los valores default
+	    	 verificavalue(Textos.empresadeusuario, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 verificavalue(Textos.correoeusuario, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input"));
+	    	 verificavalue(Textos.cuentausuario, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 verificavalue(Textos.quehaceusuario, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div[2]/form/ul/li/div/div[2]/textarea"));
 
+	    	 WebElement empresaimput = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 WebElement cuentaimput = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 WebElement quehaceimput = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div[2]/form/ul/li/div/div[2]/textarea"));
+	    	 WebElement guardargeneralinfo = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[4]/button"));
+	    	 String empresarandom = RandomStringGenerator.generateRandomString(10,RandomStringGenerator.Mode.ALPHANUMERIC);
+	    	 String cuentarandom = RandomStringGenerator.generateRandomString(10,RandomStringGenerator.Mode.ALPHANUMERIC);
+	    	 String quehacerandom = RandomStringGenerator.generateRandomString(60,RandomStringGenerator.Mode.ALPHANUMERIC);
 	    	 
+	    	 //verifico si se pueden guardar vacio ojo con esto
+	    	 empresaimput.clear();
+	    	 cuentaimput.clear();
+	    	 quehaceimput.clear();
+	    	 guardargeneralinfo.click();
+
+	    	 //modificacion de los valores por otros
+	    	 empresaimput.sendKeys(empresarandom);
+	    	 cuentaimput.sendKeys(cuentarandom);
+	    	 quehaceimput.sendKeys(quehacerandom);
+	    	 guardargeneralinfo.click();
+	    	 
+	    	 //se verifica que se modificaran el nombre y titulo y se vea en el resto de la pagina
+	    	 verificatxt(empresarandom.toUpperCase(), By.xpath("//section[@id='content']/div/div/div/div/div/h3"));
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div/a/img")).click();
+	    	 Thread.sleep(500);
+	    	 verificatxt(cuentarandom, By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a/span/span"));
+	    	 verificatxt(empresarandom, By.xpath("//section[@id='content']/div/div[2]/div/div/ng-include/div/div/div/div/div[2]/p"));
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 Thread.sleep(500);
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 
+	    	 //SE COLOCAN LOS VALORES DEFAULT DE NUEVO
+	    	 WebElement empresaimput1 = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 WebElement cuentaimput1 = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 WebElement quehaceimput1 = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div[2]/form/ul/li/div/div[2]/textarea"));
+	    	 WebElement guardargeneralinfo1 = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li[4]/button"));
+	    	 empresaimput1.clear();
+	    	 cuentaimput1.clear();
+	    	 quehaceimput1.clear();
+	    	 empresaimput1.sendKeys(Textos.empresadeusuario);
+	    	 cuentaimput1.sendKeys(Textos.cuentausuario);
+	    	 quehaceimput1.sendKeys(Textos.quehaceusuario);
+	    	 guardargeneralinfo1.click();
 	    	 
 	    	
-	    	 
+	    	
 	      }
 	     
-	     
+	      @Test   
+	      public void A7myprofileadress() throws Exception{
+	    	 control("A7myprofileadress"); 	    	 
+	    	 driver.get("https://ooflow.herokuapp.com/#/dashboard");
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 Thread.sleep(500);
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 
+	    	
+	    	
+	    	
+	      }     
 	     
 	     
 	     
