@@ -65,7 +65,7 @@ import java.util.Date;
 
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PruebasOoflow {
+public class PruebasOoflow{
 	static String ruta = "Resultados de pruebas"+File.separator+"Ooflow"+ File.separator;
  	
     //declaracion del webdriver y la direccion de la pagina
@@ -285,11 +285,11 @@ public class PruebasOoflow {
 	      
 	      
 	      
-	      //@Test    
+	      @Test    
 	      public void A1verificarloginincorrecto()throws Exception{
 	    	 control("A1verificarloginincorrecto");
 	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
-	         
+	         captura();
 	         
 	              
 	        // caso ambos llenos pero incorrectos
@@ -325,7 +325,7 @@ public class PruebasOoflow {
 	      }
 	      
 	         
-	     //@Test    
+	     @Test    
 	     public void A2recordarclave()throws Exception{
 	   	 control("A2recordarclave");
 	   	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -359,7 +359,7 @@ public class PruebasOoflow {
 	     
   
 	     
-	     //@Test    
+	     @Test    
 	      public void A3signup()throws Exception{
 	    	 control("A3signup");     	 
 	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -560,7 +560,7 @@ public class PruebasOoflow {
 	    	
 	      }
 	     
-	      @Test   
+	      //@Test   
 	      public void A7myprofileadress() throws Exception{
 	    	 control("A7myprofileadress"); 	    	 
 	    	 driver.get("https://ooflow.herokuapp.com/#/dashboard");
@@ -571,12 +571,82 @@ public class PruebasOoflow {
 	    	 Thread.sleep(500);
 	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
 	    	 
+	    	 verificavalue(Textos.direccion, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]"));
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/div/div/button")).click();
 	    	
+	    	 
+	    	
+	    	 
 	    	
 	    	
 	      }     
 	     
-	     
+	      //@Test   
+	      public void A8myprofiletelefono() throws Exception{
+	    	 control("A8myprofiletelefono"); 	
+	    	 String telefonorandom2 = RandomStringGenerator.generateRandomString(11,RandomStringGenerator.Mode.NUMERIC);
+	    	 String telefonorandom3 = RandomStringGenerator.generateRandomString(20,RandomStringGenerator.Mode.ALPHANUMERIC);
+	    	 String telefonorandom4 = RandomStringGenerator.generateRandomString(60,RandomStringGenerator.Mode.ALPHANUMERIC);
+	    	 
+	    	 driver.get("https://ooflow.herokuapp.com/#/dashboard");
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
+	    	 Thread.sleep(500);
+	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 
+	    	 //reviso condicion inicial
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input)"));
+	    	 verificavalue(Textos.telefono, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[4]/div/div[2]/input"));
+	    	 
+	    	 //añado telefono 2
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input)"));
+	    	 verificavalue(Textos.telefono, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 verificavalue("", By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)")).sendKeys(telefonorandom2);
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form[2]/ul/li/div/div[3]/div/span")).click();
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[4]/div/div[2]/input"));
+	    	 verificavalue(telefonorandom2, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 
+	    	 //añado telefono 3
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 verificavalue(Textos.telefono, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
+	    	 verificavalue(telefonorandom2, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 verificavalue("", By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input")).sendKeys(telefonorandom3);
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form[2]/ul/li/div/div[3]/div/span")).click();
+	    	 verificavalue(telefonorandom3, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[4]/div/div[2]/input"));
+	      
+	    	 //pretendo añadir varias filas de telefono sin llenarlas
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/div/div/button")).click();
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[4]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[5]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[6]/div/div[2]/input"));
+	    	 
+	    	 
+	    	 verificavalue(telefonorandom3, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
+	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[4]/div/div[2]/input"));
+	      
+	      
+	      
+	      }     
 	     
 	     
 	     
@@ -593,8 +663,8 @@ public class PruebasOoflow {
 
 	      
 	      
-	    //@After
-	      public void tearDown() throws Exception {
+	    @AfterClass
+	      public static void tearDown() throws Exception {
 	    	    driver.quit();
 
 	    	  }

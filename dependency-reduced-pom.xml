@@ -25,7 +25,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>selenium_maven_eclipse.Prore</mainClass>
+              <mainClass>selenium_maven_eclipse.Tester</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -54,7 +54,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>selenium_maven_eclipse.Prore</mainClass>
+              <mainClass>selenium_maven_eclipse.Tester</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>.</Class-Path>

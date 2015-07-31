@@ -18,7 +18,9 @@ public class Tester {
 
 	//este es el main
 	public static void main(String[] args) throws Exception{ 
-		final File reportDir = new File(ruta);
+		
+		File resultadosDir = new File("Resultados de pruebas");		
+		resultadosDir.mkdir();
 		Project project = new Project();
 		JUnitTask task = new JUnitTask();
 		project.setProperty("java.io.tmpdir","."); //set temporary directory
@@ -33,7 +35,7 @@ public class Tester {
 		formater.setType(type);
 		task.addFormatter(formater);
 		JUnitTest test = new JUnitTest(PruebasOoflow.class.getName());// set Test.class.getname() 
-		test.setTodir(reportDir); // set Location for your report
+		test.setTodir(resultadosDir); // set Location for your report
 		task.addTest(test);         
 		task.execute();
 				
