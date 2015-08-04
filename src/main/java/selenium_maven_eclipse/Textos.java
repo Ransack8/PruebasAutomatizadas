@@ -4,7 +4,7 @@ import org.openqa.selenium.Dimension;
 
 public class Textos{
 
-	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or password.";
+	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or pàssword.";
 	public static final String introducecorreo = "Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset";
 	public static final String  reset = "Reset";
 	public static final String  forgotpassword = "Forgot your password?";
@@ -55,6 +55,17 @@ public class Textos{
 	public static final String  addphone  = "Add phone";
 	public static final String  quickbooksintegration  = "QUICKBOOKS INTEGRATION";
 	
+	//My Connections
+	public static final String  myconnections = "My connections"; 
+	public static final String  ooflownetwork = "ooflow Network";
+	public static final String  addcontac  = "Add Contact";
+	public static final String  connectionsactual = "Saul Inc.";
+	 
+	
+	
+	
+	
+	
 	
 	
 	
@@ -75,6 +86,9 @@ public class Textos{
 	public static final String signupURL = "https://ooflow.herokuapp.com/#/pages/signup";
 	public static final String dashboardURL = "https://ooflow.herokuapp.com/#/dashboard";
 	public static final String myprofileURL = "https://ooflow.herokuapp.com/#/pages/profile";
+	public static final String myconnectionURL = "https://ooflow.herokuapp.com/#/connections/myconnections";	
+	public static final String myconnectionaddURL = "https://ooflow.herokuapp.com/#/connections/myconnections#contactSection";	
+	
 	
 	
 	

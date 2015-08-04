@@ -39,6 +39,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -53,6 +54,7 @@ import org.apache.log4j.SimpleLayout;
  * import org.openqa.selenium.support.ui.ExpectedConditions;
  * import org.openqa.selenium.support.ui.WebDriverWait;*/
 //imports para manejo de assert con alertas
+
 
 
 
@@ -285,7 +287,7 @@ public class PruebasOoflow{
 	      
 	      
 	      
-	      @Test    
+	      //@Test    
 	      public void A1verificarloginincorrecto()throws Exception{
 	    	 control("A1verificarloginincorrecto");
 	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -325,7 +327,7 @@ public class PruebasOoflow{
 	      }
 	      
 	         
-	     @Test    
+	     //@Test    
 	     public void A2recordarclave()throws Exception{
 	   	 control("A2recordarclave");
 	   	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -359,7 +361,7 @@ public class PruebasOoflow{
 	     
   
 	     
-	     @Test    
+	     //@Test    
 	      public void A3signup()throws Exception{
 	    	 control("A3signup");     	 
 	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -484,7 +486,7 @@ public class PruebasOoflow{
 	      }
 	      
 	      
-	      @Test   
+	      //@Test   
 	      public void A6myprofilegeneralinfo() throws Exception{
 	    	 control("A6myprofilegeneralinfo"); 
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
@@ -560,6 +562,7 @@ public class PruebasOoflow{
 	    	
 	      }
 	     
+	      //esto se va modificar proximamente no se va automaizar por ahora
 	      //@Test   
 	      public void A7myprofileadress() throws Exception{
 	    	 control("A7myprofileadress"); 	    	 
@@ -580,7 +583,7 @@ public class PruebasOoflow{
 	    	
 	    	
 	      }     
-	     
+	     //saul tiene que reparar esto
 	      //@Test   
 	      public void A8myprofiletelefono() throws Exception{
 	    	 control("A8myprofiletelefono"); 	
@@ -649,7 +652,103 @@ public class PruebasOoflow{
 	      }     
 	     
 	     
-	     
+	      
+	      @Test   
+	      public void A9myconeections() throws Exception{
+	    	 control("A9myconeections"); 	    	 
+	    	 //driver.get("https://ooflow.herokuapp.com/#/dashboard");
+	    	 	  
+	    	 driver.findElement(By.xpath("//ul[@id='nav']/li[3]/a")).click();
+	    	 Thread.sleep(500);
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myconnectionURL);
+	    	 //leo textos
+	    	 verificatxt(Textos.myconnections.toUpperCase(), By.xpath("//div[2]/div/section/div"));
+	    	 verificatxt(Textos.ooflownetwork.toUpperCase(), By.xpath("//div[2]/div[2]/section/div"));
+	    	 verificatxt(Textos.connectionsactual, By.xpath("//section[@id='content']/div/div[2]/div/section/div[2]/ul/li/a"));
+	    	 verificatxt(Textos.addcontac, By.xpath("//section[@id='content']/div/div[2]/div/section/div[3]/button"));
+	    	 
+	    	 
+	    	 //buscador
+	    	 estanopresente(By.xpath("//section/ul/li"));
+	    	 estanopresente(By.xpath("//section/ul/li[2]"));
+	    	 estanopresente(By.xpath("//section/ul/li[3]"));
+	    	 estapresente(By.xpath("//div[2]/ul/li"));
+	    	 driver.findElement(By.xpath("//input[@id='search']")).sendKeys("s");
+	    	 Thread.sleep(500);
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li[2]"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li[3]"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li[4]"));
+	    	 estapresente(By.xpath("//div[2]/ul/li"));
+	    	 driver.findElement(By.xpath("//input[@id='search']")).sendKeys("ynergy");
+	    	 Thread.sleep(500);
+	    	 estanopresente(By.xpath("//div[2]/ul/li"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li"));
+	    	 estanopresente(By.xpath("//section/ul/li[2]"));
+	    	 estanopresente(By.xpath("//section/ul/li[3]"));
+	    	 driver.findElement(By.xpath("//section/ul/li/span")).click();
+	    	 estanopresente(By.xpath("//div[2]/ul/li"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li"));
+	    	 estanopresente(By.xpath("//section/ul/li[2]"));
+	    	 //agrego de una busqueda
+	    	 driver.findElement(By.xpath("//input[@id='search']")).clear();
+	    	 driver.findElement(By.xpath("//input[@id='search']")).sendKeys("ooflow");
+	    	 estanopresente(By.xpath("//div[2]/ul/li"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li"));
+	    	 estanopresente(By.xpath("//section/ul/li[2]"));
+	    	 driver.findElement(By.xpath("//section/ul/li/span")).click();
+	    	 
+	    	 
+	    	
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 //esto deberia de arreglarlo saul se necesita click 2 veces una de las veces solo cambia el url y no la pagina
+	    	 driver.findElement(By.xpath("//div[3]/button")).click();
+	    	 verificaurl(driver.getCurrentUrl(),Textos.myconnectionaddURL);
+	    	 driver.findElement(By.xpath("//div[3]/button")).click();
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 //verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 
+	    	 //verificavalue(Textos.direccion, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]"));
+	    	 //driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/div/div/button")).click();
+	    	
+	    	 
+	    	
+	    	 
+	    	
+	    	
+	      }  
+
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
 	     
 	     
 	     
@@ -663,7 +762,7 @@ public class PruebasOoflow{
 
 	      
 	      
-	    @AfterClass
+	    //@AfterClass
 	      public static void tearDown() throws Exception {
 	    	    driver.quit();
 
