@@ -287,7 +287,7 @@ public class PruebasOoflow{
 	      
 	      
 	      
-	      //@Test    
+	      @Test    
 	      public void A1verificarloginincorrecto()throws Exception{
 	    	 control("A1verificarloginincorrecto");
 	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
@@ -327,7 +327,7 @@ public class PruebasOoflow{
 	      }
 	      
 	         
-	     //@Test    
+	     @Test    
 	     public void A2recordarclave()throws Exception{
 	   	 control("A2recordarclave");
 	   	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
