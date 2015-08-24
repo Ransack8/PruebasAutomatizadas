@@ -4,7 +4,7 @@ import org.openqa.selenium.Dimension;
 
 public class Textos{
 
-	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or pàssword.";
+	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or password.";
 	public static final String introducecorreo = "Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset";
 	public static final String  reset = "Reset";
 	public static final String  forgotpassword = "Forgot your password?";

@@ -16,7 +16,7 @@
 		
 	    //para el timestamp si lo queremos
 	    public static String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
-		static String ruta = "Resultados de pruebas"+File.separator+"Prore"+ File.separator;
+		static String ruta = "Resultados de pruebas"+File.separator+"Ooflow"+ File.separator;
 
 		//este es el main
 		public static void main(String[] args) throws Exception{ 

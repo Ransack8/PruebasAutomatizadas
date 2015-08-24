@@ -212,14 +212,14 @@ public class PruebasOoflow{
 		  }
 	  
 
-		  public void verificaurl(String currenturl , String url){
+		  public void verificaurl(String url){
 			  	
 		      try {
-		          assertEquals(currenturl, driver.getCurrentUrl());
+		          assertEquals(url, driver.getCurrentUrl());
 		        } catch (Error e) {
 		            //MANDANDO EL ERROR AL LOG y al junit
 		          logger.error("ERROR: "+e.toString());
-		          assertEquals(currenturl, driver.getCurrentUrl());
+		          assertEquals(url, driver.getCurrentUrl());
 		        }
 		  	}		  
 		  
@@ -290,7 +290,7 @@ public class PruebasOoflow{
 	      @Test    
 	      public void A1verificarloginincorrecto()throws Exception{
 	    	 control("A1verificarloginincorrecto");
-	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 verificaurl(Textos.loginURL);
 	         captura();
 	         
 	              
@@ -330,12 +330,12 @@ public class PruebasOoflow{
 	     @Test    
 	     public void A2recordarclave()throws Exception{
 	   	 control("A2recordarclave");
-	   	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	   	 verificaurl(Textos.loginURL);
 	   	 verificatxt(Textos.forgotpassword,"//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
 	   	 verificatxt(Textos.donthaveaccount,"//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
 	   	 driver.findElement(By.linkText(Textos.forgotpassword)).click();
 		 Thread.sleep(300);
-		 verificaurl(driver.getCurrentUrl(),Textos.forgotpassURL);
+		 verificaurl(Textos.forgotpassURL);
 		 verificatxt(Textos.introducecorreo,By.xpath("//section[@id='content']"));
 		 verificatxt(Textos.reset,"//section[@id='content']/div/div[3]/form/div[2]/a");
 	   	 verificatxt(Textos.instruccionesrecuperacion,"//section[@id='content']/div/div[2]/p");
@@ -346,12 +346,12 @@ public class PruebasOoflow{
 	     Thread.sleep(1000);
 	     verificatxt(Textos.errorrecoverpassword, By.xpath("//section[@id='content']/div/div[3]/section/div"));        
 	      
-	   	 verificaurl(driver.getCurrentUrl(),Textos.forgotpassURL);
+	   	 verificaurl(Textos.forgotpassURL);
 	     //datos validos
 	     driver.findElement(By.xpath("//input[@type='email']")).clear();
 	     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("movilidadsynergy@gmail.com");
 	     driver.findElement(By.linkText("Reset")).click();
-	     Thread.sleep(2000);
+	     Thread.sleep(1000);
 	     verificatxt(Textos.emailsent, By.xpath("//section[@id='content']/div/div[3]/section/div"));
          Thread.sleep(5000);
 	     
@@ -361,21 +361,21 @@ public class PruebasOoflow{
 	     
   
 	     
-	     //@Test    
+	     @Test    
 	      public void A3signup()throws Exception{
 	    	 control("A3signup");     	 
-	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 verificaurl(Textos.loginURL);
 	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.signupURL);
+	    	 verificaurl(Textos.signupURL);
 	    	 verificatxt(Textos.termsandconditions, By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/p"));
 	    	 verificatxt(Textos.haveaccount, By.xpath("//section[@id='content']/div/div[2]/div/div/section[3]/p"));
 	    	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 verificaurl(Textos.loginURL);
 	    	 Thread.sleep(500);    	
 	    	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
-	    	 verificaurl(driver.getCurrentUrl(),Textos.signupURL);
+	    	 verificaurl(Textos.signupURL);
 	    	 
 	    	 //casos de prueba de singup
 	    	 //casos posibles correos ya registrados, correos invalidos, correo vacio y registro exitoso
@@ -420,7 +420,7 @@ public class PruebasOoflow{
 	    	 verificatxt(Textos.userexists, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
 	    	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.loginURL);
+	    	 verificaurl(Textos.loginURL);
 	    	 
 	    	 
 	      }
@@ -434,12 +434,13 @@ public class PruebasOoflow{
 		    	driver.findElement(By.xpath("//input[@type='username']")).sendKeys("silfredomora@gmail.com");
 		        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("synergy1234");
 		        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-		        verificaurl(driver.getCurrentUrl(),Textos.dashboardURL);
+		        Thread.sleep(1000);
+		        verificaurl(Textos.dashboardURL);
 		 	 	  	 
 	      }
 	      
 	      
-	      //@Test   
+	      @Test   
 	      public void A5dashboard () throws Exception{
 	    	 control("A5dashboard"); 
 	    	 Thread.sleep(4000);
@@ -486,7 +487,7 @@ public class PruebasOoflow{
 	      }
 	      
 	      
-	      //@Test   
+	      @Test   
 	      public void A6myprofilegeneralinfo() throws Exception{
 	    	 control("A6myprofilegeneralinfo"); 
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/a")).click();
@@ -494,7 +495,7 @@ public class PruebasOoflow{
 	    	 Thread.sleep(300);
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
 	    	 Thread.sleep(300);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 verificaurl(Textos.myprofileURL);
 	    	 verificatxt(Textos.empresadeusuario.toUpperCase(), By.xpath("//section[@id='content']/div/div/div/div/div/h3"));
 	    	 captura("//section[@id='content']/div/div/div/div/div/img");
 	    	 verificatxt(Textos.generalinfo, By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div/strong"));
@@ -543,7 +544,7 @@ public class PruebasOoflow{
 	    	 Thread.sleep(500);
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 verificaurl(Textos.myprofileURL);
 	    	 
 	    	 //SE COLOCAN LOS VALORES DEFAULT DE NUEVO
 	    	 WebElement empresaimput1 = driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[2]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
@@ -562,8 +563,8 @@ public class PruebasOoflow{
 	    	
 	      }
 	     
-	      //esto se va modificar proximamente no se va automaizar por ahora
-	      //@Test   
+	      @Ignore("Esto no se va implementar por ahora, se van a desarrollar cambios")
+	      @Test   
 	      public void A7myprofileadress() throws Exception{
 	    	 control("A7myprofileadress"); 	    	 
 	    	 driver.get("https://ooflow.herokuapp.com/#/dashboard");
@@ -572,7 +573,7 @@ public class PruebasOoflow{
 	    	 Thread.sleep(500);
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 verificaurl(Textos.myprofileURL);
 	    	 
 	    	 verificavalue(Textos.direccion, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]"));
 	    	 driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/div/div/button")).click();
@@ -583,8 +584,8 @@ public class PruebasOoflow{
 	    	
 	    	
 	      }     
-	     //saul tiene que reparar esto
-	      //@Test   
+	     @Ignore ("se tiene que reparar esta funcionalidad para que la prueba corra")
+	      @Test   
 	      public void A8myprofiletelefono() throws Exception{
 	    	 control("A8myprofiletelefono"); 	
 	    	 String telefonorandom2 = RandomStringGenerator.generateRandomString(11,RandomStringGenerator.Mode.NUMERIC);
@@ -597,10 +598,10 @@ public class PruebasOoflow{
 	    	 Thread.sleep(500);
 	    	 driver.findElement(By.xpath("//section[@id='header']/header/div[3]/ul/li[2]/ul/li/a")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 verificaurl(Textos.myprofileURL);
 	    	 
 	    	 //reviso condicion inicial
-	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input)"));
+	    	 estapresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
 	    	 verificavalue(Textos.telefono, By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li/div/div[2]/input"));
 	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[2]/div/div[2]/input)"));
 	    	 estanopresente(By.xpath("//section[@id='content']/div/div/div/div[3]/div[2]/div/div[2]/div/div/div/form/ul/li[3]/div/div[2]/input"));
@@ -660,7 +661,7 @@ public class PruebasOoflow{
 	    	 	  
 	    	 driver.findElement(By.xpath("//ul[@id='nav']/li[3]/a")).click();
 	    	 Thread.sleep(500);
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myconnectionURL);
+	    	 verificaurl(Textos.myconnectionURL);
 	    	 //leo textos
 	    	 verificatxt(Textos.myconnections.toUpperCase(), By.xpath("//div[2]/div/section/div"));
 	    	 verificatxt(Textos.ooflownetwork.toUpperCase(), By.xpath("//div[2]/div[2]/section/div"));
@@ -695,33 +696,32 @@ public class PruebasOoflow{
 	    	 driver.findElement(By.xpath("//input[@id='search']")).sendKeys("ooflow");
 	    	 estanopresente(By.xpath("//div[2]/ul/li"));
 	    	 estapresente(By.xpath("//section[@id='content']/div/div[2]/div[2]/section/ul/li"));
-	    	 estanopresente(By.xpath("//section/ul/li[2]"));
+	    	 //estanopresente(By.xpath("//section/ul/li[2]"));
 	    	 driver.findElement(By.xpath("//section/ul/li/span")).click();
-	    	 
-	    	 
-	    	
-	    	 
-	    	 
-	    	 
-	    	 
-	    	 
-	    	 
+	    	     	 
 	    	 
 	    	 
 	    	 
 	    	 //esto deberia de arreglarlo saul se necesita click 2 veces una de las veces solo cambia el url y no la pagina
 	    	 driver.findElement(By.xpath("//div[3]/button")).click();
-	    	 verificaurl(driver.getCurrentUrl(),Textos.myconnectionaddURL);
+	    	 verificaurl(Textos.myconnectionaddURL);
 	    	 driver.findElement(By.xpath("//div[3]/button")).click();
 	    	 
 	    	 
+	    	 //restauro situacion inicial
+	    	 //if(driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/section/div[2]/ul/li")).getAttribute("value")=="ooflow, Inc.")
+	    	 { driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/section/div[2]/ul/li/span")).click();
+	    	 Thread.sleep(500);
+	    	 driver.findElement(By.cssSelector("button.btn.btn-danger")).click();
 	    	 
+	    	 }
 	    	 
-	    	 
-	    	 //verificaurl(driver.getCurrentUrl(),Textos.myprofileURL);
+	    	 //verificaurl(Textos.myprofileURL);
 	    	 
 	    	 //verificavalue(Textos.direccion, By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/form/ul/li/div/div[2]"));
-	    	 //driver.findElement(By.xpath("//section[@id='content']/div/div/div/div[3]/div/div/div[2]/div/div/div/div/div/button")).click();
+	    	 
+	    	
+	    	 
 	    	
 	    	 
 	    	
