@@ -25,7 +25,12 @@
 			resultadosDir.mkdir();
 			
 
-			Class [] clases ={PruebasOoflow.class};
+			//pruebas silfredo
+			Class [] clases ={PruebasOoflow.class, PruebaStefano.class};
+			
+			//pruebas stefano
+			//Class [] clases ={PruebasOoflow.class};
+			
 			for( Class claseactual : clases )
 			{
 				Project project = new Project();

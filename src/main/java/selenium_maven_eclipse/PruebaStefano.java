@@ -9,6 +9,10 @@ import java.util.Properties;
 
 
 
+
+
+
+
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,11 +27,13 @@ import javax.mail.Store;
 import javax.mail.Flags;
 import javax.mail.search.SubjectTerm;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PruebaStefano extends PruebasOoflow{
 
 	String newemail = "jondoeqa@gmail.com";
@@ -35,200 +41,158 @@ public class PruebaStefano extends PruebasOoflow{
 	String passooflow = "clave1234";
 	
 	
-
-	
-	
-
-    //@Test    
-    public void B1signup()throws Exception{
-  	 control("B1signup");     	 
-  	 verificaurl(Textos.loginURL);
-  	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
-  	 Thread.sleep(500);
-  	 verificaurl(Textos.signupURL);
-  	 verificatxt(Textos.termsandconditions, By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/p"));
-  	 verificatxt(Textos.haveaccount, By.xpath("//section[@id='content']/div/div[2]/div/div/section[3]/p"));
-  	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
-  	 Thread.sleep(500);
-  	 verificaurl(Textos.loginURL);
-  	 Thread.sleep(500);    	
-  	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
-  	 verificaurl(Textos.signupURL);
-  	 
-  	 //casos de prueba de singup
-  	 //casos posibles correos ya registrados, correos invalidos, correo vacio y registro exitoso
-  	 
-  	 //caso correo invalido esta medio malo porque no reconoce la estructura de email por ahora
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfre");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-  	 estapresente(By.xpath("//div[@class='form-group has-error']"));
-  	 
-  	 //caso clave vacia no tiene sentido invalida?
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-  	 estapresente(By.xpath("//div[@class='form-group has-error']"));
-  	 
-  	 //caso ambas vacias
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-  	 estapresente(By.xpath("//div[@class='form-group has-error']"));
-  	 
-  	 //caso correo ya registrado
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-  	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
-  	 verificatxt(Textos.userexists, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
-  	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
-  	 Thread.sleep(500);
-  	 verificaurl(Textos.loginURL);
-  	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
-  	 Thread.sleep(500);
-  	 
-  	 
-  	 //regristro correo nuevo
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("newemail@dd.com");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("passooflow");
-  	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
-  	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
-  	 verificatxt(Textos.registroexitoso, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));  	
-  	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
-  	 
-  	 
-    }
-	
-    
-	  //@Test    
-      public void B3verificarloginincorrecto()throws Exception{
-    	 control("B3verificarloginincorrecto");
-    	 verificaurl(Textos.loginURL);
-       	 verificatxt(Textos.forgotpassword,"//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
-       	 verificatxt(Textos.donthaveaccount,"//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");            
-        // caso ambos llenos pero incorrectos
-    	estanopresente(By.xpath("//div[@class='form-group has-error']")); 
-        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
-        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
-        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
- 	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
- 	 	verificatxt(Textos.usuariooclaveinvalido, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
- 	 		 	
-    	
- 	 	//usuario vacio
- 		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
- 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
-        driver.findElement(By.xpath("//input[@type='password']")).clear();
-        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
-        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-        estapresente(By.xpath("//div[@class='form-group has-error']"));
+	 @Test    
+     public void A1verificarloginincorrecto()throws Exception{
+   	 control("A1verificarloginincorrecto");
+   	 verificaurl(Textos.loginURL);
+                 
+       // caso ambos llenos pero incorrectos
+   	 estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+   	 driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+       driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+       driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+	 	estanopresente(By.xpath("//div[@class='form-group has-error']"));
+	 	verificatxt(Textos.usuariooclaveinvalido, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+	 		 	
+   	
+	 	//usuario vacio
+		estanopresente(By.xpath("//div[@class='form-group has-error']")); 
+	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+       driver.findElement(By.xpath("//input[@type='password']")).clear();
+       driver.findElement(By.xpath("//input[@type='password']")).sendKeys("12345678");
+       driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+       estapresente(By.xpath("//div[@class='form-group has-error']"));
+      
+	 	//pass vacio
+	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
+       driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
+       driver.findElement(By.xpath("//input[@type='password']")).clear();
+       driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+       estapresente(By.xpath("//div[@class='form-group has-error']"));
        
- 	 	//pass vacio
- 	 	driver.findElement(By.xpath("//input[@type='username']")).clear();
-        driver.findElement(By.xpath("//input[@type='username']")).sendKeys("asd");
-        driver.findElement(By.xpath("//input[@type='password']")).clear();
-        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-        estapresente(By.xpath("//div[@class='form-group has-error']"));
-        
-   	    //ambos vacios
-        driver.findElement(By.xpath("//input[@type='username']")).clear();
-        driver.findElement(By.xpath("//input[@type='password']")).clear();
-        driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-        estapresente(By.xpath("//div[@class='form-group has-error']"));
-        
-      }
-    
-	    @Test   
-	    public void B4activateaccout () throws Exception{
-	  	 control("B4Activateaccout");    	 
-	  	 
-	  	 
-	  	 //defino protocolo
-	  	Properties props = System.getProperties();
-	  	props.setProperty("mail.store.protocol", "imaps");
-	  	 
-	  	 //defino sesion
-	  	//Session session = Session.getInstance(props, null);
-	  	Session session = Session.getInstance(props);
-	  	
-	  	//acceso email por store class
-	  	Store store = session.getStore();
-	  	store.connect("imap.gmail.com", newemail, passemail);
-	  	Folder inbox = store.getFolder("INBOX");
-	  	inbox.open(Folder.READ_ONLY);
-	  	 	           
-            
-	  	 
-            System.out.println("Total Message:" + inbox.getMessageCount());
-            System.out.println("Unread Message:"+ inbox.getUnreadMessageCount());
-            
-            Message[] messages = null;
-            boolean isMailFound = false;
-            Message mailFromGod= null;
+  	    //ambos vacios
+       driver.findElement(By.xpath("//input[@type='username']")).clear();
+       driver.findElement(By.xpath("//input[@type='password']")).clear();
+       driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+       estapresente(By.xpath("//div[@class='form-group has-error']"));
+       
+     }
+     
+     @Test    
+     public void A2recordarclave()throws Exception{
+   	 control("A2recordarclave");
+   	 verificaurl(Textos.loginURL);
+   	 verificatxt(Textos.forgotpassword,"//section[@id='content']/div/div[2]/div/div/section[2]/p/a");
+   	 verificatxt(Textos.donthaveaccount,"//section[@id='content']/div/div[2]/div/div/section[2]/p[2]");
+   	 driver.findElement(By.linkText(Textos.forgotpassword)).click();
+	 Thread.sleep(300);
+	 verificaurl(Textos.forgotpassURL);
+	 verificatxt(Textos.introducecorreo,By.xpath("//section[@id='content']"));
+	 verificatxt(Textos.reset,"//section[@id='content']/div/div[3]/form/div[2]/a");
+   	 verificatxt(Textos.instruccionesrecuperacion,"//section[@id='content']/div/div[2]/p");
+   	 
+	 //datos invalidos
+     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("correoinvalido@dominio.com");
+     driver.findElement(By.linkText("Reset")).click();
+     Thread.sleep(1000);
+     verificatxt(Textos.errorrecoverpassword, By.xpath("//section[@id='content']/div/div[3]/section/div"));        
+      
+   	 verificaurl(Textos.forgotpassURL);
+     //datos validos
+     driver.findElement(By.xpath("//input[@type='email']")).clear();
+     driver.findElement(By.xpath("//input[@type='email']")).sendKeys("movilidadsynergy@gmail.com");
+     driver.findElement(By.linkText("Reset")).click();
+     driver.findElement(By.linkText("Reset")).click();
+     Thread.sleep(1000);
+     verificatxt(Textos.emailsent, By.xpath("//section[@id='content']/div/div[3]/section/div"));
+     Thread.sleep(5000);
+     
+     
+     }
+     
+     
+     @Test    
+     public void A3signup()throws Exception{
+   	 control("A3signup");     	 
+   	 verificaurl(Textos.loginURL);
+   	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
+   	 Thread.sleep(500);
+   	 verificaurl(Textos.signupURL);
+   	 verificatxt(Textos.termsandconditions, By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/label/span"));
+   	 verificatxt(Textos.haveaccount, By.xpath("//section[@id='content']/div/div[2]/div/div/section[3]/p"));
+   	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
+   	 Thread.sleep(500);
+   	 verificaurl(Textos.loginURL);
+   	 Thread.sleep(500);    	
+   	 driver.findElement(By.xpath("//a[contains(@href, '#/pages/signup')]")).click();
+   	 verificaurl(Textos.signupURL);
+   	 
+   	 //casos de prueba de singup
+   	 //casos posibles correos ya registrados, correos invalidos, correo vacio y registro exitoso
+   	 
+   	 //caso correo invalido esta medio malo porque no reconoce la estructura de email por ahora
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfre");
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
+   	 //acepto terminos
+   	 driver.findElement(By.cssSelector("span.text-muted.text-small")).click();
+   	driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+  	 estapresente(By.xpath("//div[@class='form-group has-error']"));
+   	 
+   	 //caso clave vacia no tiene sentido invalida?
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+   	 estapresente(By.xpath("//div[@class='form-group has-error']"));
+   	 
+   	 //caso ambas vacias
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+   	 estapresente(By.xpath("//div[@class='form-group has-error']"));
+   	 
+   	 //caso correo ya registrado con sin aceptar terminos
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys("silfredomora@hotmail.com");
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys("synergy1234");
 
-            //Search correo de ooflow
-            for (int i = 0; i < 5; i++) {
-                messages = inbox.search(new SubjectTerm("Confirm your account on ooflow"),inbox.getMessages());
-                //Wait for 10 seconds
-                if (messages.length == 0) {
-                    Thread.sleep(10000);
-                }
-            }
-
-            //Search for unread mail from God
-            //This is to avoid using the mail for which 
-            //Registration is already done
-            for (Message mail : messages) {
-                if (!mail.isSet(Flags.Flag.SEEN)) {
-                    mailFromGod = mail;
-                    System.out.println("Message Count is: "+ mailFromGod.getMessageNumber());
-                    isMailFound = true;
-                }
-            }
-
-            //Test fails if no unread mail was found from ooflow
-            if (!isMailFound) {
-                throw new Exception(
-                        "No se encontro email de regristro sin leer");
-            
-            //Read the content of mail and launch registration URL                
-            } else {
-                String line;
-                StringBuffer buffer = new StringBuffer();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(mailFromGod.getInputStream()));
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line);
-                }
-                System.out.println(buffer);
-
-                //Your logic to split the message and get the Registration URL goes here
-                String registrationURL = buffer.toString().split("&amp;gt;https://ooflow.herokuapp.com/#/pages/confirm?")[0].split("href=")[1];
-                System.out.println(registrationURL);                            
-            }
-    
-
-	  	 
-
-	  	 
-	  	 
-	  	 
-	  	 
-	  	 
-		 	 	  	 
-	    }
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+   	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
+   	 //ya registrado   	 
+   	 verificatxt(Textos.userexists, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+   	 
+   	  	 
+   	 //regristro nuevo sin los terminos y luego correcto
+     driver.findElement(By.cssSelector("span.text-muted.text-small")).click();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).clear();
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).clear();
+   	 //driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys(Tester.filetimestamp+RandomStringGenerator.generateRandomString(5,RandomStringGenerator.Mode.ALPHANUMERIC)+"@dominio.com");
+   	 //driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys(RandomStringGenerator.generateRandomString(10,RandomStringGenerator.Mode.ALPHANUMERIC));
+ 	 //cuando regristremos siempre la misma cuenta
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div/input")).sendKeys(newemail);
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[2]/input")).sendKeys(passooflow);
+   	 driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+   	 estanopresente(By.xpath("//div[@class='form-group has-error']"));
+   	 verificatxt(Textos.errorsingup, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+   	 driver.findElement(By.cssSelector("span.text-muted.text-small")).click();
+   	driver.findElement(By.xpath("//section[@id='content']/div/div[2]/div/div/section[2]/form/div[3]/a")).click();
+   	Thread.sleep(500);
+   	verificatxt(Textos.registroexitoso, By.xpath("//section[@id='content']/div/div[2]/div/div/section/div"));
+   	 driver.findElement(By.xpath("//a[contains(text(),'Log in now')]")).click();
+   	 Thread.sleep(500);
+   	 verificaurl(Textos.loginURL);
+   	 
+     }
+	
+	
 
 	  
     
     @Test   
-    public void B2login () throws Exception{
+    public void A4login () throws Exception{
   	 control("B2login");    	 
   		        
 	    	driver.findElement(By.xpath("//input[@type='username']")).sendKeys(newemail);

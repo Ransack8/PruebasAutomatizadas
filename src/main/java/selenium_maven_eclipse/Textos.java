@@ -12,11 +12,13 @@ public class Textos{
 	public static final String  donthaveaccount = "Don't have an account yet? Sign up";
 	public static final String  emailsent = "×\nClose\nAn email has been sent to you with a verification link.";
 	public static final String  instruccionesrecuperacion = "Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.";
-	public static final String  termsandconditions = "By clicking on Sign up, you agree to terms & conditions and privacy policy";
+	public static final String  termsandconditions = "I agree to the terms of service and privacy policy";
 	public static final String  haveaccount = "Already have an account? Log in now";
 	public static final String  userexists = "×\nClose\nRegistration Failed. User already exists";
 	public static final String  registroexitoso = "×\nClose\n¡Registration Successful! Check your email for further instructions";
 	public static final String  login = "Log in";
+	public static final String  errorsingup = "×\nClose\nIn order to sign up, you must agree to the Terms of Service and Privacy Policy";
+	 
 	//datos del usuario
 	public static final String  cuentausuario = "Silfredo";
 	public static final String  empresadeusuario = "Synergy";
@@ -88,7 +90,8 @@ public class Textos{
 	public static final String myprofileURL = "https://ooflow.herokuapp.com/#/pages/profile";
 	public static final String myconnectionURL = "https://ooflow.herokuapp.com/#/connections/myconnections";	
 	public static final String myconnectionaddURL = "https://ooflow.herokuapp.com/#/connections/myconnections#contactSection";	
-	
+	public static final String termsURL = "http://tranquil-ocean-9553.herokuapp.com/index.php?open=tos";	
+	public static final String privacyURL = "http://tranquil-ocean-9553.herokuapp.com/index.php?open=pp";	
 	
 	
 	
