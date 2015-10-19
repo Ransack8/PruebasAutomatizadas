@@ -43,6 +43,24 @@ public class PruebaStefano extends PruebasOoflow{
 	
 	 @Test    
      public void A1verificarloginincorrecto()throws Exception{
+		 
+		 
+		    //driver.get(baseUrl + "/wiki/Wikipedia:Portada");
+		    driver.get("https://es.wikipedia.org/wiki/Wikipedia:Portada");
+		    driver.findElement(By.cssSelector("a[title=\"Visitar la página principal [Alt+Shift+z]\"]")).click();
+		    driver.findElement(By.linkText("Portal de la comunidad")).click();
+		    driver.findElement(By.id("searchInput")).clear();
+		    driver.findElement(By.id("searchInput")).sendKeys("chavez");
+		    driver.findElement(By.id("searchButton")).click();
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
    	 control("A1verificarloginincorrecto");
    	 verificaurl(Textos.loginURL);
                  

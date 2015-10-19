@@ -67,6 +67,9 @@ import org.apache.log4j.SimpleLayout;
 //para los time stamp
 import java.util.Date;
 //
+
+
+
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PruebasOoflow{
@@ -81,7 +84,7 @@ public class PruebasOoflow{
       private boolean acceptNextAlert = true;
 
       
-      //captura de pantalla aca ponemos la tura y la clase que estamos probando
+      //captura de pantalla aca ponemos la ruta y la clase que estamos probando
       MultiScreenShot mShot=new MultiScreenShot(ruta,Tester.filetimestamp + File.separator);
   	
       // declaracion de los loggers  
