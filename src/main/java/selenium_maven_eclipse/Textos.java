@@ -4,6 +4,15 @@ import org.openqa.selenium.Dimension;
 
 public class Textos{
 
+	//datos del usuario
+	public static final String  cuentausuario = "Silfredo";
+	public static final String  empresadeusuario = "Synergy";
+	public static final String  correoeusuario = "jondoeqa@gmail.com";
+	public static final String  quehaceusuario = "Aplicaciones";
+	public static final String  direccion = "urb el encantado, Caracas, Distrito Capital, 10300, Venezuela";	
+	public static final String  telefono = "04123007453";	
+	
+	
 	public static final String usuariooclaveinvalido = "×\nClose\nInvalid username or password.";
 	public static final String introducecorreo = "Enter your email address that you used to register. We'll send you an email with your username and a link to reset your password.\nReset";
 	public static final String  reset = "Reset";
@@ -18,14 +27,10 @@ public class Textos{
 	public static final String  registroexitoso = "×\nClose\n¡Registration Successful! Check your email for further instructions";
 	public static final String  login = "Log in";
 	public static final String  errorsingup = "×\nClose\nIn order to sign up, you must agree to the Terms of Service and Privacy Policy";
-	 
-	//datos del usuario
-	public static final String  cuentausuario = "Silfredo";
-	public static final String  empresadeusuario = "Synergy";
-	public static final String  correoeusuario = "silfredomora@gmail.com";
-	public static final String  quehaceusuario = "Aplicaciones";
-	public static final String  direccion = "urb el encantado, Caracas, Distrito Capital, 10300, Venezuela";	
-	public static final String  telefono = "04123007453";	
+	public static final String  welcome = "×\nClose\nWelcome to PayGorilla! A quick fill of your profile and you're good to go. Don't worry, this is the only boring form to fill out. Don't forget to add your address and phone.";
+
+	
+	
 	//dashboard
 	public static final String  dashboardmenu = "Dashboard";
 	public static final String  invoicesmenu = "Invoices";
@@ -56,6 +61,11 @@ public class Textos{
 	public static final String  addaddress  = "Add address";
 	public static final String  addphone  = "Add phone";
 	public static final String  quickbooksintegration  = "QUICKBOOKS INTEGRATION";
+	public static final String  companyname  = "Company name";
+	public static final String  yourname  = "Your Name";
+	//public static final String  quickbooksintegration  = "QUICKBOOKS INTEGRATION";
+	//public static final String  quickbooksintegration  = "QUICKBOOKS INTEGRATION";
+	
 	
 	//My Connections
 	public static final String  myconnections = "My connections"; 
@@ -80,16 +90,15 @@ public class Textos{
 	
 	
 	
-	
-	
-	
-	public static final String loginURL = "https://ooflow.herokuapp.com/#/pages/signin";
-	public static final String forgotpassURL = "https://ooflow.herokuapp.com/#/pages/forgot-password";
-	public static final String signupURL = "https://ooflow.herokuapp.com/#/pages/signup";
-	public static final String dashboardURL = "https://ooflow.herokuapp.com/#/dashboard";
-	public static final String myprofileURL = "https://ooflow.herokuapp.com/#/pages/profile";
-	public static final String myconnectionURL = "https://ooflow.herokuapp.com/#/connections/myconnections";	
-	public static final String myconnectionaddURL = "https://ooflow.herokuapp.com/#/connections/myconnections#contactSection";	
+	//URL
+	public static final String baseUrl ="https://paygorilla.herokuapp.com";	
+	public static final String loginURL = "https://paygorilla.herokuapp.com/#/pages/signin";
+	public static final String forgotpassURL = "https://paygorilla.herokuapp.com/#/pages/forgot-password";
+	public static final String signupURL = "https://paygorilla.herokuapp.com/#/pages/signup";
+	public static final String dashboardURL = "https://paygorilla.herokuapp.com/#/dashboard";
+	public static final String myprofileURL = "https://paygorilla.herokuapp.com/#/pages/profile";
+	public static final String myconnectionURL = "https://paygorilla.herokuapp.com/#/connections/myconnections";	
+	public static final String myconnectionaddURL = "https://paygorilla.herokuapp.com/#/connections/myconnections#contactSection";	
 	public static final String termsURL = "http://tranquil-ocean-9553.herokuapp.com/index.php?open=tos";	
 	public static final String privacyURL = "http://tranquil-ocean-9553.herokuapp.com/index.php?open=pp";	
 	

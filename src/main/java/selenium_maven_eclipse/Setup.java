@@ -41,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
 //Librería para apoyarnos en los logs para presentar los resultados de las pruebas
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -64,28 +65,31 @@ import org.apache.log4j.SimpleLayout;
 
 
 
+
 //para los time stamp
 import java.util.Date;
 //
 
-
-
 //correr los casos en orden alfabetico
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PruebasOoflow{
-	static String ruta = "Resultados de pruebas"+File.separator+"Ooflow"+ File.separator;
- 	
-    //declaracion del webdriver y la direccion de la pagina
+public class Setup{
+	
+     //declaracion del webdriver y la direccion de la pagina
       public static WebDriver driver;
       public static String baseUrl;
       public static WebDriverWait wait;
       //declaracion del string de errores y para el random     
 
       private boolean acceptNextAlert = true;
+      
+      //usuario nuevo
+      String newemail = "jondoeqa@gmail.com";
+      String passemail = "synergy1234";
+  	  String passooflow = "clave1234";
 
       
       //captura de pantalla aca ponemos la ruta y la clase que estamos probando
-      MultiScreenShot mShot=new MultiScreenShot(ruta,Tester.filetimestamp + File.separator);
+      MultiScreenShot mShot=new MultiScreenShot(Tester.ruta,Tester.filetimestamp + File.separator);
   	
       // declaracion de los loggers  
       public static final Logger logger = Logger.getLogger("WebdriverTest");
@@ -267,21 +271,14 @@ public class PruebasOoflow{
 	            
 	            //System.setProperty("webdriver.chrome.driver", "."+File.separator+File.separator+"chromedriver.exe");
 	           // WebDriver driver = new ChromeDriver();
-  
-	            
-	            
-	            
-	            
-	            
-	            
+         
 	            
 	            
 	          //<<<<<WebDriver>>>>>
 	          //default para FIREFOX  
 	          driver = new FirefoxDriver();
-	          baseUrl = "https://ooflow.herokuapp.com";
 	          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    	  driver.get(baseUrl);
+	    	  driver.get(Textos.baseUrl);
 	    	  driver.manage().window().maximize();
 	    	  logger.info("fin del setup");
 	      
@@ -299,34 +296,7 @@ public class PruebasOoflow{
 	        
 	      }
 	      
-	         
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	      
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	      
+    
 
 	      
 	      

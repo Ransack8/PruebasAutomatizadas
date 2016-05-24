@@ -2,21 +2,21 @@
 	package selenium_maven_eclipse;
 
 	import org.apache.tools.ant.Project;
-	import org.apache.tools.ant.taskdefs.optional.junit.FormatterElement;
-	import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask;
-	import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
-	import org.junit.runner.JUnitCore;
+import org.apache.tools.ant.taskdefs.optional.junit.FormatterElement;
+import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask;
+import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
+import org.junit.runner.JUnitCore;
 
 	import java.io.File;
-	import java.text.SimpleDateFormat;
-	import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 	public class Tester {
 
 		
 	    //para el timestamp si lo queremos
 	    public static String filetimestamp = new SimpleDateFormat("yyyyMMddhhmm").format(new Date());
-		static String ruta = "Resultados de pruebas"+File.separator+"Ooflow"+ File.separator;
+	    static String ruta = "Resultados de pruebas"+File.separator+"PayGorilla"+ File.separator;
 
 		//este es el main
 		public static void main(String[] args) throws Exception{ 
@@ -26,7 +26,7 @@
 			
 
 			//pruebas silfredo
-			Class [] clases ={PruebasOoflow.class, PruebaStefano.class};
+			Class [] clases ={Setup.class, PayGorilla.class};
 			
 			//pruebas stefano
 			//Class [] clases ={PruebasOoflow.class};

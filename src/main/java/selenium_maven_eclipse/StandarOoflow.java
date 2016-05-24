@@ -8,19 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
-public class StandarOoflow extends PruebasOoflow {
+public class StandarOoflow extends Setup {
 
 
 	
-	 
-         
-
-     
-
-     
-
-     
-     
+	     
       
 
       
